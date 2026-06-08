@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #25221d;
+  background: #f7f2e8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(37, 34, 29, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 34, 29, 0.025) 1px, transparent 1px),
+    #f7f2e8;
+  background-size: 36px 36px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.math-scroll {
+  overflow-x: auto;
+}
+
+.paper-card {
+  border: 1px solid rgba(63, 59, 53, 0.15);
+  background: rgba(255, 252, 246, 0.86);
+  box-shadow: 0 12px 30px rgba(63, 59, 53, 0.1);
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: #1f5a4a;
+}
