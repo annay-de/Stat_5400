@@ -66,12 +66,12 @@ export function VisualLabPage() {
         description="These tools are built around the problem types that matter most: dice, cards, Bayes, joint supports, transformations, CLT, MLE, intervals, tests and power."
       />
       <div className="grid gap-5 lg:grid-cols-[300px_1fr]">
-        <aside className="paper-card rounded p-3 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-auto">
+        <aside className="paper-card human-card p-3 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-auto">
           {playgrounds.map((item, index) => (
             <button
               key={item}
-              className={`focus-ring mb-2 flex w-full items-center gap-3 rounded px-3 py-2 text-left text-sm ${
-                active === item ? "bg-accent-hero text-white shadow-soft" : "bg-surface/80 text-graphite hover:bg-surface"
+              className={`focus-ring mb-2 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm ${
+                active === item ? "bg-lavender text-white shadow-soft" : "bg-white/[0.03] text-graphite hover:bg-mist"
               }`}
               onClick={() => setActive(item)}
             >
@@ -82,7 +82,7 @@ export function VisualLabPage() {
             </button>
           ))}
         </aside>
-        <section className="paper-card min-h-[620px] rounded p-5">
+        <section className="paper-card human-card min-h-[620px] p-5">
           <h2 className="font-sans text-3xl font-semibold text-ink">{active}</h2>
           <div className="mt-5">
             <Playground name={active} />
@@ -117,7 +117,7 @@ function Playground({ name }: { name: string }) {
 
 function Control({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label className="text-xs font-semibold uppercase tracking-[0.14em] text-brass">
+    <label className="text-sm font-semibold text-ocean">
       {label}
       <div className="mt-1">{children}</div>
     </label>
@@ -133,13 +133,13 @@ function NumberInput({ value, setValue, min, max, step = 1 }: { value: number; s
       step={step}
       value={value}
       onChange={(event) => setValue(Number(event.target.value))}
-      className="w-full accent-forest"
+      className="w-full accent-teal"
     />
   );
 }
 
 function ChartBox({ children, height = 320 }: { children: React.ReactNode; height?: number }) {
-  return <div style={{ height }} className="rounded border border-ocean/15 bg-surface/75 p-3 shadow-soft">{children}</div>;
+  return <div style={{ height }} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 shadow-soft">{children}</div>;
 }
 
 function DiceVisualiser() {

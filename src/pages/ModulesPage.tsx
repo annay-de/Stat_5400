@@ -3,12 +3,12 @@ import { PageHeader } from "../components/PageHeader";
 import { courseModules } from "../data/courseTopics";
 
 const moduleTones = [
-  "border-ocean/20 bg-surface/80 text-ocean",
-  "border-forest/20 bg-surface/80 text-forest",
-  "border-brass/25 bg-surface/80 text-brass",
-  "border-oxblood/20 bg-surface/80 text-oxblood",
-  "border-slateblue/20 bg-surface/80 text-slateblue",
-  "border-forest/20 bg-surface/80 text-forest",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
 ];
 
 export function ModulesPage() {
@@ -21,9 +21,9 @@ export function ModulesPage() {
       />
       <div className="grid gap-4 md:grid-cols-2">
         {courseModules.map((module, index) => (
-          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/35 hover:shadow-soft">
+          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring human-card p-5 transition hover:-translate-y-0.5 hover:border-ocean/30 hover:shadow-soft">
             <div className="flex items-start gap-4">
-              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded border font-sans text-lg font-semibold ${moduleTones[index % moduleTones.length]}`}>
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border font-sans text-lg font-semibold ${moduleTones[index % moduleTones.length]}`}>
                 {index + 1}
               </span>
               <div>
@@ -31,7 +31,7 @@ export function ModulesPage() {
                 <p className="mt-2 text-sm leading-6 text-graphite">{module.question}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {module.relatedProblems.map((id) => (
-                    <span key={id} className="rounded border border-forest/15 bg-surface/80 px-2 py-1 text-xs text-forest">{id}</span>
+                    <span key={id} className="quiet-chip rounded-full px-2.5 py-1 text-xs text-graphite">{id}</span>
                   ))}
                 </div>
               </div>

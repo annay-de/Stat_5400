@@ -1,5 +1,5 @@
 {
-  "name": "statistics-mastery-lab",
+  "name": "statistics-study-lab",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@fontsource/poppins": "^5.2.7",
+    "@fontsource/source-sans-3": "^5.2.9",
     "@vitejs/plugin-react": "^5.0.0",
     "katex": "^0.16.22",
     "lucide-react": "^0.468.0",

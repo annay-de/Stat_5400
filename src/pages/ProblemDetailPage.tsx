@@ -11,46 +11,46 @@ export function ProblemDetailPage() {
 
   return (
     <div>
-      <PageHeader eyebrow={`${problem.source} · ${problem.number}`} title={problem.title} description={problem.statement} />
+      <PageHeader eyebrow={`${problem.source} - ${problem.number}`} title={problem.title} description={problem.statement} />
       <div className="grid gap-5 lg:grid-cols-[1fr_340px]">
         <div className="space-y-5">
-          <section className="paper-card rounded p-5">
+          <section className="paper-card human-card p-5">
             <h2 className="font-sans text-2xl font-semibold text-ink">Final answer</h2>
             <p className="mt-3 text-base leading-7 text-graphite">{problem.finalAnswer}</p>
           </section>
-          <section className="paper-card rounded p-5">
+          <section className="paper-card human-card p-5">
             <h2 className="font-sans text-2xl font-semibold text-ink">Exam-style solution</h2>
             <div className="mt-4">
               <SolutionSteps steps={problem.solution} />
             </div>
           </section>
           {problem.visualExplanation ? (
-            <section className="paper-card rounded p-5">
+            <section className="paper-card human-card p-5">
               <h2 className="font-sans text-2xl font-semibold text-ink">Visual explanation</h2>
               <p className="mt-3 leading-7 text-graphite">{problem.visualExplanation}</p>
             </section>
           ) : null}
         </div>
         <aside className="space-y-4">
-          <div className="paper-card rounded p-5">
+          <div className="paper-card human-card p-5">
             <h2 className="font-sans text-xl font-semibold text-ink">Tags</h2>
             <div className="mt-3 flex flex-wrap gap-2">
-              {problem.tags.map((tag) => <span key={tag} className="rounded bg-forest/10 px-2 py-1 text-xs text-forest">{tag}</span>)}
+              {problem.tags.map((tag) => <span key={tag} className="quiet-chip rounded-full px-2.5 py-1 text-xs text-graphite">{tag}</span>)}
             </div>
           </div>
-          <div className="paper-card rounded p-5">
+          <div className="paper-card human-card p-5">
             <h2 className="font-sans text-xl font-semibold text-ink">Common traps</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-graphite">
               {problem.commonTraps.map((trap) => <li key={trap}>{trap}</li>)}
             </ul>
           </div>
-          <div className="paper-card rounded p-5">
+          <div className="paper-card human-card p-5">
             <h2 className="font-sans text-xl font-semibold text-ink">Similar generated question</h2>
             <p className="mt-3 text-sm leading-6 text-graphite">{problem.similarQuestion}</p>
           </div>
           {archetype ? (
-            <Link to="/archetypes" className="paper-card focus-ring block rounded p-5 hover:border-forest/50">
-              <div className="text-xs uppercase tracking-[0.16em] text-brass">Related archetype</div>
+            <Link to="/archetypes" className="paper-card focus-ring human-card block p-5 hover:border-ocean/30">
+              <div className="text-sm font-semibold text-ocean">Related archetype</div>
               <div className="mt-2 font-sans text-xl font-semibold text-ink">{archetype.title}</div>
             </Link>
           ) : null}

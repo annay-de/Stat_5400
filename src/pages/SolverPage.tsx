@@ -85,13 +85,13 @@ export function SolverPage() {
         title="Ask, classify, then calculate"
         description="The local Stats Coach reads the wording, recognises the archetype, explains why the formula applies, and points you to matching solved problems. The calculator below handles exact numerical workflows."
       />
-      <section className="paper-card mb-6 rounded-2xl p-5">
+      <section className="paper-card human-card mb-6 p-5">
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <label className="text-xs uppercase tracking-[0.14em] text-brass">
+            <label className="text-sm font-semibold text-ocean">
               Ask the local Stats Coach
               <textarea
-                className="soft-input mt-2 h-36 w-full rounded-xl px-4 py-3 text-sm normal-case leading-6 tracking-normal text-ink"
+                className="soft-input mt-2 h-36 w-full rounded-2xl px-4 py-3 text-sm font-normal leading-6 text-ink"
                 value={coachQuestion}
                 onChange={(event) => setCoachQuestion(event.target.value)}
               />
@@ -102,22 +102,22 @@ export function SolverPage() {
           </div>
           <div className="space-y-4">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Detected path</div>
+              <div className="text-sm font-semibold text-ocean">Detected path</div>
               <h2 className="mt-2 text-2xl font-semibold text-ink">{coach.archetype.title}</h2>
               <p className="mt-2 text-sm leading-7 text-graphite">{coach.summary}</p>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-paper/45 p-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <h3 className="text-sm font-semibold text-ink">What to do first</h3>
                 <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-graphite">
                   {coach.method.slice(0, 5).map((step) => <li key={step}>{step}</li>)}
                 </ol>
               </div>
-              <div className="rounded-xl border border-white/10 bg-paper/45 p-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <h3 className="text-sm font-semibold text-ink">Closest solved problems</h3>
                 <div className="mt-3 space-y-2">
                   {coach.relatedProblems.map((problem) => (
-                    <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded-lg border border-white/10 px-3 py-2 text-sm text-graphite hover:border-teal/30 hover:text-ink">
+                    <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded-xl border border-white/10 px-3 py-2 text-sm text-graphite hover:border-ocean/30 hover:text-ink">
                       {problem.title}
                     </Link>
                   ))}
@@ -133,50 +133,50 @@ export function SolverPage() {
 
       <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
         <aside className="space-y-4">
-          <div className="paper-card rounded-2xl p-5">
-            <label className="text-xs uppercase tracking-[0.14em] text-brass">
+          <div className="paper-card human-card p-5">
+            <label className="text-sm font-semibold text-ocean">
               Paste question wording
-              <textarea className="soft-input mt-2 h-32 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
+              <textarea className="soft-input mt-2 h-32 w-full rounded-2xl px-3 py-2 text-sm font-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
             </label>
-            <button className="focus-ring mt-3 w-full rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-soft" onClick={suggest}>Suggest archetype</button>
+            <button className="focus-ring mt-3 w-full rounded-full bg-lavender px-3 py-2 text-sm text-white shadow-soft" onClick={suggest}>Suggest archetype</button>
             {suggested ? (
-              <button className="focus-ring mt-3 w-full rounded border border-forest/20 bg-surface/80 px-3 py-2 text-left text-sm text-forest" onClick={() => selectKind(suggested)}>
+              <button className="focus-ring mt-3 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 text-left text-sm text-ocean" onClick={() => selectKind(suggested)}>
                 Suggested: {solverLabels[suggested]}
               </button>
             ) : null}
           </div>
-          <div className="paper-card rounded-2xl p-5">
-            <label className="text-xs uppercase tracking-[0.14em] text-brass">
+          <div className="paper-card human-card p-5">
+            <label className="text-sm font-semibold text-ocean">
               Guided calculator
-              <select className="soft-input mt-2 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
+              <select className="soft-input mt-2 w-full rounded-xl px-3 py-2 text-sm font-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
                 {(Object.keys(solverLabels) as SolverKind[]).map((item) => <option key={item} value={item}>{solverLabels[item]}</option>)}
               </select>
             </label>
             <div className="mt-4 space-y-3">
               {Object.entries(values).map(([field, value]) => (
-                <label key={field} className="block text-xs uppercase tracking-[0.12em] text-brass">
+                <label key={field} className="block text-sm font-semibold text-ocean">
                   {fieldLabels[field] ?? field}
                   {field === "tail" ? (
-                    <select className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
+                    <select className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm font-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
                       <option value="greater">greater than</option>
                       <option value="less">less than</option>
                       <option value="two-sided">two-sided</option>
                     </select>
                   ) : (
-                    <input type="number" step="any" className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
+                    <input type="number" step="any" className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm font-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
                   )}
                 </label>
               ))}
             </div>
           </div>
         </aside>
-        <section className="paper-card rounded-2xl p-6">
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Generated answer format</div>
+        <section className="paper-card human-card p-6">
+          <div className="text-sm font-semibold text-ocean">Generated answer format</div>
           <h2 className="mt-2 font-sans text-3xl font-semibold text-ink">{solverLabels[kind]}</h2>
           <div className="mt-5">
             <SolutionSteps steps={steps} />
           </div>
-          <div className="mt-6 rounded border border-brass/20 bg-surface/80 p-4 text-sm leading-6 text-graphite">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-graphite">
             In an exam, define variables and state assumptions before substituting. For tests, include H0, HA, statistic, null distribution, alpha, rejection rule, computed value and conclusion.
           </div>
         </section>

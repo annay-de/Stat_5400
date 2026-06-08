@@ -5,21 +5,21 @@ import { problemBank } from "../data/problemBank";
 import { studyPlan } from "../data/studyPlan";
 
 const shortcuts = [
-  { label: "Start Today", to: "/modules/probability", icon: BookMarked, tone: "bg-surface/80 text-forest border-forest/20" },
-  { label: "Final Exam Mode", to: "/exam-mode", icon: Timer, tone: "bg-surface/80 text-oxblood border-oxblood/20" },
-  { label: "Problem Bank", to: "/problem-bank", icon: ListChecks, tone: "bg-surface/80 text-ocean border-ocean/20" },
-  { label: "Formula and Method Sheet", to: "/formula-sheet", icon: Sigma, tone: "bg-surface/80 text-brass border-brass/25" },
-  { label: "Visual Playgrounds", to: "/visual-lab", icon: FlaskConical, tone: "bg-surface/80 text-slateblue border-slateblue/20" },
+  { label: "Start practice", to: "/modules/probability", icon: BookMarked },
+  { label: "Mock exam", to: "/exam-mode", icon: Timer },
+  { label: "Problem bank", to: "/problem-bank", icon: ListChecks },
+  { label: "Formula sheet", to: "/formula-sheet", icon: Sigma },
+  { label: "Visual lab", to: "/visual-lab", icon: FlaskConical },
 ];
 
 const dayTones = [
-  "border-ocean/20 bg-surface/80 text-ocean",
-  "border-forest/20 bg-surface/80 text-forest",
-  "border-brass/25 bg-surface/80 text-brass",
-  "border-oxblood/20 bg-surface/80 text-oxblood",
-  "border-slateblue/20 bg-surface/80 text-slateblue",
-  "border-forest/20 bg-surface/80 text-forest",
-  "border-white/15 bg-surface/80 text-ink",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-ocean/20 bg-white/[0.03] text-ocean",
+  "border-white/15 bg-white/[0.03] text-ink",
 ];
 
 export function DashboardPage() {
@@ -31,14 +31,14 @@ export function DashboardPage() {
       <section className="grid gap-7 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="hero-glass flex min-h-[440px] flex-col justify-between rounded-2xl p-7 md:p-9">
           <div>
-            <div className="inline-flex rounded-full border border-ocean/20 bg-surface/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-ocean">
-              One-week intensive study system
+            <div className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm font-medium text-ocean">
+              Visual probability and statistics
             </div>
-            <h1 className="mt-6 max-w-3xl font-sans text-4xl font-semibold leading-tight text-ink md:text-6xl">
-              Statistics Mastery Lab
+            <h1 className="mt-6 max-w-3xl font-sans text-4xl font-semibold leading-tight text-ink md:text-[4.25rem]">
+              Statistics, without the panic.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-graphite">
-              A dark, visual statistics workspace for learning why each method exists, when to use it, and how to turn a question into a clean exam solution.
+              A dark study desk for seeing the picture, reading the mathematics, and turning exam questions into calm, written solutions.
             </p>
           </div>
           <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -48,7 +48,7 @@ export function DashboardPage() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`focus-ring flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition hover:-translate-y-0.5 hover:bg-mist hover:shadow-soft ${item.tone}`}
+                  className="focus-ring flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-ink transition hover:-translate-y-0.5 hover:border-ocean/30 hover:bg-lavender/70 hover:shadow-soft"
                 >
                   <span className="flex items-center gap-2">
                     <Icon size={17} />
@@ -70,21 +70,21 @@ export function DashboardPage() {
       <section>
         <div className="mb-4 flex items-end justify-between gap-4">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">One-week emergency plan</div>
-            <h2 className="mt-1 font-sans text-3xl font-semibold text-ink">Seven days, no wandering</h2>
+            <div className="text-sm font-semibold text-ocean">7-day study plan</div>
+            <h2 className="mt-1 font-sans text-3xl font-semibold text-ink">A focused route through the material</h2>
           </div>
-          <Link to="/survival-sheet" className="focus-ring hidden rounded bg-accent-hero px-4 py-2 text-sm font-medium text-white shadow-soft sm:inline-flex">
-            Final survival sheet
+          <Link to="/survival-sheet" className="focus-ring hidden rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-ink shadow-soft hover:border-ocean/30 sm:inline-flex">
+            Final review
           </Link>
         </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
           {studyPlan.map((day, index) => (
-            <article key={day.day} className="paper-card accent-strip rounded-2xl p-5">
+            <article key={day.day} className="paper-card human-card p-5">
               <div className="flex items-center justify-between gap-3">
-                <span className={`flex h-9 w-9 items-center justify-center rounded border font-sans text-lg font-semibold ${dayTones[index % dayTones.length]}`}>
+                <span className={`flex h-9 w-9 items-center justify-center rounded-full border font-sans text-lg font-semibold ${dayTones[index % dayTones.length]}`}>
                   {day.day}
                 </span>
-                <span className={`rounded border px-2 py-1 text-xs ${dayTones[index % dayTones.length]}`}>Day {day.day}</span>
+                <span className={`rounded-full border px-2.5 py-1 text-xs ${dayTones[index % dayTones.length]}`}>Day {day.day}</span>
               </div>
               <h3 className="mt-4 min-h-16 font-sans text-lg font-semibold leading-tight text-ink">{day.title}</h3>
               <div className="mt-4 space-y-3 text-sm leading-6 text-graphite">

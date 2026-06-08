@@ -36,9 +36,9 @@ export function ProblemBankPage() {
   return (
     <div>
       <PageHeader eyebrow="Problem bank" title="Problems with solved methods" description="Search by source, topic, difficulty, exam relevance and archetype. Solved status is stored locally in your browser." />
-      <div className="paper-card mb-5 rounded p-4">
+      <div className="paper-card human-card mb-5 p-4">
         <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
-          <input className="soft-input rounded px-3 py-2 text-sm" placeholder="Search problems" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input className="soft-input rounded-xl px-3 py-2 text-sm" placeholder="Search problems" value={query} onChange={(event) => setQuery(event.target.value)} />
           <Select value={topic} onChange={setTopic} options={["all", ...topicTags]} label="Topic" />
           <Select value={source} onChange={setSource} options={["all", ...sourceNames]} label="Source" />
           <Select value={difficulty} onChange={setDifficulty} options={["all", "Core", "Medium", "Hard", "Exam"]} label="Difficulty" />
@@ -46,13 +46,13 @@ export function ProblemBankPage() {
           <Select value={archetype} onChange={setArchetype} options={["all", ...Array.from(new Set(problemBank.map((problem) => problem.archetype))).sort()]} label="Archetype" />
         </div>
       </div>
-      <div className="mb-4 text-sm text-graphite">{filtered.length} problems shown · {Object.values(solved).filter(Boolean).length} marked solved</div>
+      <div className="mb-4 text-sm text-graphite">{filtered.length} problems shown - {Object.values(solved).filter(Boolean).length} marked solved</div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((problem) => (
           <div key={problem.id} className="relative">
             <ProblemCard problem={problem} />
             <button
-              className={`focus-ring absolute bottom-3 right-3 rounded px-2 py-1 text-xs ${solved[problem.id] ? "bg-accent-hero text-white shadow-soft" : "border border-ocean/15 bg-surface/80 text-graphite"}`}
+              className={`focus-ring absolute bottom-3 right-3 rounded-full px-2.5 py-1 text-xs ${solved[problem.id] ? "bg-lavender text-white shadow-soft" : "quiet-chip text-graphite"}`}
               onClick={() => toggleSolved(problem.id)}
             >
               {solved[problem.id] ? "Solved" : "Mark solved"}
@@ -66,9 +66,9 @@ export function ProblemBankPage() {
 
 function Select({ value, onChange, options, label }: { value: string; onChange: (value: string) => void; options: string[]; label: string }) {
   return (
-    <label className="text-xs uppercase tracking-[0.14em] text-brass">
+    <label className="text-sm font-semibold text-ocean">
       {label}
-      <select className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={value} onChange={(event) => onChange(event.target.value)}>
+      <select className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm font-normal text-ink" value={value} onChange={(event) => onChange(event.target.value)}>
         {options.map((option) => <option key={option} value={option}>{option === "all" ? `All ${label.toLowerCase()}` : option}</option>)}
       </select>
     </label>

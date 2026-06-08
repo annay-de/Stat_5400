@@ -12,13 +12,13 @@ export function ArchetypesPage() {
         {archetypes.map((archetype, index) => {
           const solved = problemBank.find((problem) => problem.id === archetype.solvedProblemId);
           return (
-            <article key={archetype.id} className="paper-card rounded p-5">
+            <article key={archetype.id} className="paper-card human-card p-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Archetype {index + 1}</div>
+                  <div className="text-sm font-semibold text-ocean">Archetype {index + 1}</div>
                   <h2 className="mt-1 font-sans text-2xl font-semibold text-ink">{archetype.title}</h2>
                 </div>
-                {solved ? <Link to={`/problem/${solved.id}`} className="focus-ring rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-soft">Solved example</Link> : null}
+                {solved ? <Link to={`/problem/${solved.id}`} className="focus-ring rounded-full border border-white/10 bg-lavender px-3 py-2 text-sm text-white shadow-soft">Solved example</Link> : null}
               </div>
               <div className="mt-5 grid gap-5 lg:grid-cols-3">
                 <Panel title="Recognition cues" items={archetype.keywords} />
@@ -40,11 +40,11 @@ export function ArchetypesPage() {
                 </div>
               </div>
               <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <div className="rounded border border-ocean/15 bg-surface/75 p-4">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                   <h3 className="font-sans text-lg font-semibold text-ink">Generated practice</h3>
                   <p className="mt-2 text-sm leading-6 text-graphite">{archetype.practice}</p>
                 </div>
-                <div className="rounded border border-brass/20 bg-surface/80 p-4">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                   <h3 className="font-sans text-lg font-semibold text-ink">Exam answer template</h3>
                   <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-graphite">
                     {archetype.template.map((line) => <li key={line}>{line}</li>)}
