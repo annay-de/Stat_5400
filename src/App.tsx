@@ -19,6 +19,7 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/learning-map" element={<CourseMapPage />} />
           <Route path="/course-map" element={<CourseMapPage />} />
           <Route path="/modules" element={<ModulesPage />} />
           <Route path="/modules/:topic" element={<ModuleDetailPage />} />

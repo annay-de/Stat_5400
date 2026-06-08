@@ -4,20 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: "#f7f2e8",
-        ink: "#25221d",
-        graphite: "#3f3b35",
-        brass: "#a47c39",
-        forest: "#1f5a4a",
-        oxblood: "#7f312f",
-        slateblue: "#53606f"
+        paper: "#f8f5ee",
+        surface: "#fffdfa",
+        mist: "#eee8dc",
+        ink: "#24221e",
+        graphite: "#555047",
+        brass: "#9c7a43",
+        forest: "#245647",
+        oxblood: "#783331",
+        slateblue: "#586575"
       },
       fontFamily: {
-        sans: ["Inter", "Aptos", "Segoe UI", "Arial", "sans-serif"],
-        serif: ["Georgia", "Cambria", "Times New Roman", "serif"]
+        sans: ["Aptos", "Inter", "ui-sans-serif", "system-ui", "Segoe UI", "Arial", "sans-serif"],
+        serif: ["Charter", "Georgia", "Cambria", "Times New Roman", "serif"]
       },
       boxShadow: {
-        paper: "0 12px 30px rgba(63, 59, 53, 0.10)"
+        paper: "0 18px 45px rgba(56, 51, 43, 0.08)",
+        soft: "0 8px 22px rgba(56, 51, 43, 0.06)"
       }
     }
   },

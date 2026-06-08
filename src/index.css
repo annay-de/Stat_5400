@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 :root {
-  color: #25221d;
-  background: #f7f2e8;
+  color: #24221e;
+  background: #f8f5ee;
+  font-family: Aptos, Inter, ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,11 +16,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background:
-    linear-gradient(rgba(37, 34, 29, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 34, 29, 0.025) 1px, transparent 1px),
-    #f7f2e8;
-  background-size: 36px 36px;
+  background: #f8f5ee;
 }
 
 button,
@@ -29,14 +26,24 @@ textarea {
   font: inherit;
 }
 
+::selection {
+  background: rgba(156, 122, 67, 0.24);
+}
+
+input,
+select,
+textarea {
+  color: #24221e;
+}
+
 .math-scroll {
   overflow-x: auto;
 }
 
 .paper-card {
-  border: 1px solid rgba(63, 59, 53, 0.15);
-  background: rgba(255, 252, 246, 0.86);
-  box-shadow: 0 12px 30px rgba(63, 59, 53, 0.1);
+  border: 1px solid rgba(56, 51, 43, 0.12);
+  background: rgba(255, 253, 250, 0.92);
+  box-shadow: 0 18px 45px rgba(56, 51, 43, 0.08);
 }
 
 .focus-ring {

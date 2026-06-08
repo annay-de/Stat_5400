@@ -19,14 +19,14 @@ export function DashboardPage() {
   return (
     <div className="space-y-8">
       <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="flex min-h-[420px] flex-col justify-between rounded border border-ink/15 bg-ink p-6 text-paper shadow-paper">
+        <div className="paper-card flex min-h-[420px] flex-col justify-between rounded-md p-6">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-brass">Ashoka University · Monsoon 2025</div>
-            <h1 className="mt-5 max-w-3xl font-serif text-4xl font-semibold leading-tight md:text-6xl">
-              ECO 5400 Statistics for Economics
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-brass">One-week intensive study system</div>
+            <h1 className="mt-5 max-w-3xl font-serif text-4xl font-semibold leading-tight text-ink md:text-6xl">
+              Statistics Mastery Lab
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-paper/80">
-              A one-week visual and mathematical cockpit built from the uploaded problem sets, discussion sheets and sample final questions.
+            <p className="mt-5 max-w-2xl text-base leading-7 text-graphite">
+              A visual and mathematical cockpit for probability, distributions, inference, asymptotics and exam-style problem solving.
             </p>
           </div>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -36,7 +36,7 @@ export function DashboardPage() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="focus-ring flex items-center justify-between rounded border border-paper/15 bg-paper/8 px-4 py-3 text-sm transition hover:bg-paper/15"
+                  className="focus-ring flex items-center justify-between rounded-md border border-ink/10 bg-white/75 px-4 py-3 text-sm text-ink transition hover:border-forest/25 hover:bg-forest/5"
                 >
                   <span className="flex items-center gap-2">
                     <Icon size={17} />

@@ -7,7 +7,7 @@ import { problemBank } from "../data/problemBank";
 export function ArchetypesPage() {
   return (
     <div>
-      <PageHeader eyebrow="Question recognition engine" title="How do I recognise this question?" description="Match wording to method before doing algebra. Each archetype links to one solved course problem and one generated practice question." />
+      <PageHeader eyebrow="Question recognition engine" title="How do I recognise this question?" description="Match wording to method before doing algebra. Each archetype links to one solved problem and one generated practice question." />
       <div className="space-y-5">
         {archetypes.map((archetype, index) => {
           const solved = problemBank.find((problem) => problem.id === archetype.solvedProblemId);
@@ -18,7 +18,7 @@ export function ArchetypesPage() {
                   <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Archetype {index + 1}</div>
                   <h2 className="mt-1 font-serif text-2xl font-semibold text-ink">{archetype.title}</h2>
                 </div>
-                {solved ? <Link to={`/problem/${solved.id}`} className="focus-ring rounded bg-ink px-3 py-2 text-sm text-paper">Solved course example</Link> : null}
+                {solved ? <Link to={`/problem/${solved.id}`} className="focus-ring rounded bg-ink px-3 py-2 text-sm text-paper">Solved example</Link> : null}
               </div>
               <div className="mt-5 grid gap-5 lg:grid-cols-3">
                 <Panel title="Recognition cues" items={archetype.keywords} />

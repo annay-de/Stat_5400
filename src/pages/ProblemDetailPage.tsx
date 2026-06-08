@@ -19,7 +19,7 @@ export function ProblemDetailPage() {
             <p className="mt-3 text-base leading-7 text-graphite">{problem.finalAnswer}</p>
           </section>
           <section className="paper-card rounded p-5">
-            <h2 className="font-serif text-2xl font-semibold text-ink">Ashoka-style solution</h2>
+            <h2 className="font-serif text-2xl font-semibold text-ink">Exam-style solution</h2>
             <div className="mt-4">
               <SolutionSteps steps={problem.solution} />
             </div>

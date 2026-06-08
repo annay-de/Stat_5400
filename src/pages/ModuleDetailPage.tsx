@@ -11,7 +11,7 @@ const sectionLabels = [
   "Core formulae",
   "Derivation",
   "Step-by-step method",
-  "Fully solved course example",
+  "Fully solved worked example",
   "Similar generated example",
   "Common exam traps",
   "Quick quiz",
@@ -49,7 +49,7 @@ export function ModuleDetailPage() {
         </div>
         <aside className="space-y-4">
           <div className="paper-card rounded p-5">
-            <h2 className="font-serif text-xl font-semibold text-ink">Course examples</h2>
+            <h2 className="font-serif text-xl font-semibold text-ink">Worked examples</h2>
             <div className="mt-4 space-y-3">
               {related.map((problem) => (
                 <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded border border-ink/10 bg-white/70 p-3 text-sm hover:border-forest/40">

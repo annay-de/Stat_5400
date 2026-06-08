@@ -63,7 +63,7 @@ export function VisualLabPage() {
       <PageHeader
         eyebrow="Visual playgrounds"
         title="See the probability before symbol-pushing"
-        description="These tools are built around the exact course problem types: dice, cards, Bayes, joint supports, transformations, CLT, MLE, intervals, tests and power."
+        description="These tools are built around the problem types that matter most: dice, cards, Bayes, joint supports, transformations, CLT, MLE, intervals, tests and power."
       />
       <div className="grid gap-5 lg:grid-cols-[300px_1fr]">
         <aside className="paper-card rounded p-3 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-auto">
@@ -195,7 +195,7 @@ function DiceVisualiser() {
           })}
         </div>
       </div>
-      <p className="text-sm leading-6 text-graphite">The course dice trap is visible here: the unordered pattern (3,3,3) is one ordered outcome, while (1,3,6) is six ordered outcomes.</p>
+      <p className="text-sm leading-6 text-graphite">The classic dice trap is visible here: the unordered pattern (3,3,3) is one ordered outcome, while (1,3,6) is six ordered outcomes.</p>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export function ProblemBankPage() {
   const [difficulty, setDifficulty] = useState("all");
   const [relevance, setRelevance] = useState("all");
   const [archetype, setArchetype] = useState("all");
-  const [solved, setSolved] = useState<Record<string, boolean>>(() => JSON.parse(localStorage.getItem("eco5400-solved") ?? "{}"));
+  const [solved, setSolved] = useState<Record<string, boolean>>(() => JSON.parse(localStorage.getItem("stats-mastery-solved") ?? "{}"));
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
@@ -30,12 +30,12 @@ export function ProblemBankPage() {
   const toggleSolved = (id: string) => {
     const next = { ...solved, [id]: !solved[id] };
     setSolved(next);
-    localStorage.setItem("eco5400-solved", JSON.stringify(next));
+    localStorage.setItem("stats-mastery-solved", JSON.stringify(next));
   };
 
   return (
     <div>
-      <PageHeader eyebrow="Problem bank" title="Course questions with solved methods" description="Search by source, topic, difficulty, exam relevance and archetype. Solved status is stored locally in your browser." />
+      <PageHeader eyebrow="Problem bank" title="Problems with solved methods" description="Search by source, topic, difficulty, exam relevance and archetype. Solved status is stored locally in your browser." />
       <div className="paper-card mb-5 rounded p-4">
         <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
           <input className="rounded border border-ink/15 bg-white/80 px-3 py-2 text-sm" placeholder="Search problems" value={query} onChange={(event) => setQuery(event.target.value)} />

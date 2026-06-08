@@ -7,7 +7,7 @@ export function CourseMapPage() {
     <div>
       <PageHeader
         eyebrow="Dependency map"
-        title="How the course compounds"
+        title="How the ideas compound"
         description="Probability is the grammar. Inference is the final essay. Each node below links the next idea to the one it depends on."
       />
       <div className="paper-card overflow-x-auto rounded p-5">
