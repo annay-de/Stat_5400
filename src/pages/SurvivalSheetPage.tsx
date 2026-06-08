@@ -70,8 +70,8 @@ export function SurvivalSheetPage() {
           {lastTwelve.map((item) => <li key={item}>{item}</li>)}
         </ol>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link to="/exam-mode" className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-colour">Run a mock final</Link>
-          <Link to="/problem-bank" className="focus-ring rounded border border-ink/15 bg-white/70 px-4 py-2 text-sm text-ink">Redo problem bank</Link>
+          <Link to="/exam-mode" className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-soft">Run a mock final</Link>
+          <Link to="/problem-bank" className="focus-ring rounded border border-white/15 bg-surface/75 px-4 py-2 text-sm text-ink">Redo problem bank</Link>
         </div>
       </section>
     </div>

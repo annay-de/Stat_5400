@@ -3,12 +3,12 @@ import { PageHeader } from "../components/PageHeader";
 import { courseModules } from "../data/courseTopics";
 
 const moduleTones = [
-  "border-ocean/20 bg-ocean/10 text-ocean",
-  "border-teal/20 bg-teal/10 text-forest",
-  "border-honey/25 bg-honey/10 text-brass",
-  "border-blush/20 bg-blush/10 text-oxblood",
-  "border-slateblue/20 bg-lavender text-slateblue",
-  "border-forest/20 bg-sage text-forest",
+  "border-ocean/20 bg-surface/80 text-ocean",
+  "border-forest/20 bg-surface/80 text-forest",
+  "border-brass/25 bg-surface/80 text-brass",
+  "border-oxblood/20 bg-surface/80 text-oxblood",
+  "border-slateblue/20 bg-surface/80 text-slateblue",
+  "border-forest/20 bg-surface/80 text-forest",
 ];
 
 export function ModulesPage() {
@@ -21,7 +21,7 @@ export function ModulesPage() {
       />
       <div className="grid gap-4 md:grid-cols-2">
         {courseModules.map((module, index) => (
-          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/40 hover:shadow-colour">
+          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/35 hover:shadow-soft">
             <div className="flex items-start gap-4">
               <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded border font-sans text-lg font-semibold ${moduleTones[index % moduleTones.length]}`}>
                 {index + 1}
@@ -31,7 +31,7 @@ export function ModulesPage() {
                 <p className="mt-2 text-sm leading-6 text-graphite">{module.question}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {module.relatedProblems.map((id) => (
-                    <span key={id} className="rounded bg-teal/10 px-2 py-1 text-xs text-forest">{id}</span>
+                    <span key={id} className="rounded border border-forest/15 bg-surface/80 px-2 py-1 text-xs text-forest">{id}</span>
                   ))}
                 </div>
               </div>

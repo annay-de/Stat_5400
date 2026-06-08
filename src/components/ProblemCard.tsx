@@ -5,7 +5,7 @@ export function ProblemCard({ problem }: { problem: Problem }) {
   return (
     <Link
       to={`/problem/${problem.id}`}
-      className="paper-card focus-ring block rounded-md p-4 transition hover:-translate-y-0.5 hover:border-ocean/40 hover:shadow-colour"
+      className="paper-card focus-ring block rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-ocean/35 hover:shadow-soft"
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
@@ -21,7 +21,7 @@ export function ProblemCard({ problem }: { problem: Problem }) {
       <p className="mt-3 line-clamp-3 text-sm leading-6 text-graphite">{problem.statement}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {problem.tags.slice(0, 4).map((tag) => (
-          <span key={tag} className="rounded-md bg-teal/10 px-2 py-1 text-xs text-forest">
+          <span key={tag} className="rounded-md border border-forest/15 bg-surface/80 px-2 py-1 text-xs text-forest">
             {tag}
           </span>
         ))}

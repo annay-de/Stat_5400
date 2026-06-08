@@ -47,9 +47,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[270px_minmax(0,1fr)]">
-      <aside className="sticky top-0 hidden h-screen border-r border-white/70 bg-surface/80 px-4 py-5 shadow-soft backdrop-blur-xl lg:block">
+      <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-paper/80 px-4 py-5 shadow-soft backdrop-blur-xl lg:block">
         <NavLink to="/" className="focus-ring flex items-center gap-3 rounded px-2 py-2">
-          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-colour">
+          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-soft">
             <Sigma size={22} />
           </div>
           <div>
@@ -80,10 +80,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-40 border-b border-white/70 bg-surface/90 backdrop-blur-xl lg:hidden">
+        <header className="sticky top-0 z-40 border-b border-white/10 bg-paper/90 backdrop-blur-xl lg:hidden">
           <div className="flex items-center justify-between gap-4 px-4 py-3">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-colour">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-soft">
               <Sigma size={22} />
             </div>
             <div>
@@ -92,7 +92,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </NavLink>
         </div>
-          <nav className="flex gap-1 overflow-x-auto border-t border-white/70 px-3 py-2">
+          <nav className="flex gap-1 overflow-x-auto border-t border-white/10 px-3 py-2">
           {mobileNavItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -101,7 +101,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 to={item.to}
                 className={({ isActive }) =>
                   `focus-ring flex shrink-0 items-center gap-2 rounded px-3 py-2 text-sm ${
-                    isActive ? "bg-accent-hero text-white shadow-colour" : "bg-white/70 text-graphite hover:bg-white"
+                    isActive ? "bg-accent-hero text-white shadow-soft" : "bg-surface/80 text-graphite hover:bg-surface"
                   }`
                 }
               >
@@ -113,7 +113,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
 
-        <main className="mx-auto max-w-[1280px] px-4 py-6 md:px-6 md:py-8 xl:px-8">{children}</main>
+        <main className="mx-auto max-w-[1360px] px-4 py-7 md:px-8 md:py-10 xl:px-10">{children}</main>
       </div>
     </div>
   );
@@ -134,8 +134,8 @@ function DesktopNavItem({
       to={item.to}
       className={`focus-ring flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition ${
         active
-          ? "bg-accent-hero text-white shadow-colour"
-          : "text-graphite hover:bg-ocean/10 hover:text-ink"
+          ? "bg-accent-hero text-white shadow-soft"
+          : "text-graphite hover:bg-surface/80 hover:text-ink"
       }`}
     >
       <Icon size={17} />

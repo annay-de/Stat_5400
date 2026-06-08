@@ -3,12 +3,12 @@ import { PageHeader } from "../components/PageHeader";
 import { courseModules, moduleDependencies } from "../data/courseTopics";
 
 const mapTones = [
-  "border-ocean/20 bg-ocean/10 text-ocean",
-  "border-teal/20 bg-teal/10 text-forest",
-  "border-honey/25 bg-honey/10 text-brass",
-  "border-blush/20 bg-blush/10 text-oxblood",
-  "border-slateblue/20 bg-lavender text-slateblue",
-  "border-forest/20 bg-sage text-forest",
+  "border-ocean/20 bg-surface/80 text-ocean",
+  "border-forest/20 bg-surface/80 text-forest",
+  "border-brass/25 bg-surface/80 text-brass",
+  "border-oxblood/20 bg-surface/80 text-oxblood",
+  "border-slateblue/20 bg-surface/80 text-slateblue",
+  "border-forest/20 bg-surface/80 text-forest",
 ];
 
 export function CourseMapPage() {
@@ -29,7 +29,7 @@ export function CourseMapPage() {
               <div key={node} className="flex items-center gap-3">
                 <Link
                   to={`/modules/${target.id}`}
-                  className={`focus-ring flex h-32 w-36 flex-col items-center justify-center rounded border px-3 text-center transition hover:-translate-y-0.5 hover:bg-white/80 hover:shadow-soft ${mapTones[index % mapTones.length]}`}
+                  className={`focus-ring flex h-32 w-36 flex-col items-center justify-center rounded border px-3 text-center transition hover:-translate-y-0.5 hover:bg-surface hover:shadow-soft ${mapTones[index % mapTones.length]}`}
                 >
                   <span className="font-sans text-base font-semibold">{node}</span>
                   <span className="mt-2 text-xs leading-5 text-graphite">Open module</span>
@@ -44,7 +44,7 @@ export function CourseMapPage() {
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {courseModules.map((module, index) => (
-          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/40 hover:shadow-colour">
+          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/35 hover:shadow-soft">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">{module.shortTitle}</div>
             <h2 className="mt-2 font-sans text-2xl font-semibold text-ink">{module.title}</h2>
             <p className="mt-3 text-sm leading-6 text-graphite">{module.question}</p>

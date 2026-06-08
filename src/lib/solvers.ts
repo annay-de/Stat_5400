@@ -118,10 +118,11 @@ export const solve = (kind: SolverKind, values: SolverInputs) => {
   if (kind === "z-test") {
     const z = zStatistic(Number(values.mean), Number(values.nullMean), Number(values.sigma), n);
     const tail = String(values.tail ?? "greater") as "less" | "greater" | "two-sided";
+    const nullMean = Number(values.nullMean);
     const critical =
       tail === "two-sided" ? inverseNormalCdf(1 - alpha / 2) : inverseNormalCdf(1 - alpha);
     return [
-      `H0: mu = ${values.nullMean}. HA: ${tail === "greater" ? "mu > mu0" : tail === "less" ? "mu < mu0" : "mu != mu0"}.`,
+      `H0: mu = ${nullMean}. HA: ${tail === "greater" ? `mu > ${nullMean}` : tail === "less" ? `mu < ${nullMean}` : `mu != ${nullMean}`}.`,
       `z = ${round(z, 4)} and p-value = ${round(pValueFromZ(z, tail), 6)}.`,
       `Critical value approach uses ${round(critical, 4)} at alpha = ${alpha}.`,
       Math.abs(z) > critical || (tail === "greater" && z > critical) || (tail === "less" && z < -critical)

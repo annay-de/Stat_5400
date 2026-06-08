@@ -71,7 +71,7 @@ export function VisualLabPage() {
             <button
               key={item}
               className={`focus-ring mb-2 flex w-full items-center gap-3 rounded px-3 py-2 text-left text-sm ${
-                active === item ? "bg-accent-hero text-white shadow-colour" : "bg-white/70 text-graphite hover:bg-white"
+                active === item ? "bg-accent-hero text-white shadow-soft" : "bg-surface/80 text-graphite hover:bg-surface"
               }`}
               onClick={() => setActive(item)}
             >
@@ -139,7 +139,7 @@ function NumberInput({ value, setValue, min, max, step = 1 }: { value: number; s
 }
 
 function ChartBox({ children, height = 320 }: { children: React.ReactNode; height?: number }) {
-  return <div style={{ height }} className="rounded border border-ocean/15 bg-white/75 p-3 shadow-soft">{children}</div>;
+  return <div style={{ height }} className="rounded border border-ocean/15 bg-surface/75 p-3 shadow-soft">{children}</div>;
 }
 
 function DiceVisualiser() {
@@ -157,20 +157,20 @@ function DiceVisualiser() {
     <div className="space-y-5">
       <div className="grid gap-4 md:grid-cols-3">
         <Control label="Dice count">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={dice} onChange={(e) => setDice(Number(e.target.value))}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={dice} onChange={(e) => setDice(Number(e.target.value))}>
             <option value={2}>Two dice</option>
             <option value={3}>Three dice</option>
           </select>
         </Control>
         <Control label="Event">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={event} onChange={(e) => setEvent(e.target.value)}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={event} onChange={(e) => setEvent(e.target.value)}>
             <option value="sum9">sum = 9</option>
             <option value="sum10">sum = 10</option>
             <option value="atLeastOdd">at least one odd</option>
             <option value="allEven">all even</option>
           </select>
         </Control>
-        <div className="rounded border border-ink/10 bg-white/70 p-3 text-sm text-graphite">
+        <div className="rounded border border-white/10 bg-surface/75 p-3 text-sm text-graphite">
           Selected {highlighted.length} of {outcomes.length} ordered outcomes: probability {round(highlighted.length / outcomes.length, 5)}.
         </div>
       </div>
@@ -182,12 +182,12 @@ function DiceVisualiser() {
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Bar dataKey="count">
-              {chart.map((row) => <Cell key={row.sum} fill={row.selected ? "#b95f68" : "#16816c"} />)}
+              {chart.map((row) => <Cell key={row.sum} fill={row.selected ? "#7e4048" : "#2f6658"} />)}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </ChartBox>
-      <div className="max-h-64 overflow-auto rounded border border-ink/10 bg-white/70 p-3">
+      <div className="max-h-64 overflow-auto rounded border border-white/10 bg-surface/75 p-3">
         <div className="grid grid-cols-4 gap-2 text-xs sm:grid-cols-6 md:grid-cols-9">
           {outcomes.map((roll) => {
             const selected = diceEvent(roll, event);
@@ -221,20 +221,20 @@ function CardsVisualiser() {
     <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
       <div>
         <Control label="Known information">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={known} onChange={(event) => setKnown(event.target.value)}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={known} onChange={(event) => setKnown(event.target.value)}>
             <option value="atLeastOne">At least one ace is selected</option>
             <option value="aceHearts">Ace of hearts is selected</option>
           </select>
         </Control>
-        <div className="mt-5 grid grid-cols-13 gap-1 rounded border border-ink/10 bg-white/70 p-3">
+        <div className="mt-5 grid grid-cols-13 gap-1 rounded border border-white/10 bg-surface/75 p-3">
           {Array.from({ length: 52 }, (_, index) => {
             const isAce = index < 4;
             const fixed = known === "aceHearts" && index === 0;
-            return <div key={index} className={`h-10 rounded border text-center text-xs leading-10 ${fixed ? "border-blush bg-blush text-white" : isAce ? "border-honey bg-honey/20 text-ink" : "border-ink/10 bg-paper text-graphite"}`}>{isAce ? "A" : ""}</div>;
+            return <div key={index} className={`h-10 rounded border text-center text-xs leading-10 ${fixed ? "border-blush bg-blush text-white" : isAce ? "border-honey bg-honey/20 text-ink" : "border-white/10 bg-paper text-graphite"}`}>{isAce ? "A" : ""}</div>;
           })}
         </div>
       </div>
-      <div className="rounded border border-ink/10 bg-white/70 p-4">
+      <div className="rounded border border-white/10 bg-surface/75 p-4">
         <h3 className="font-sans text-xl font-semibold text-ink">Conditional sample space</h3>
         <p className="mt-3 text-sm leading-6 text-graphite">Probability of at least two aces under this condition: <strong className="text-ink">{round(result, 5)}</strong>.</p>
         <p className="mt-3 text-sm leading-6 text-graphite">{known === "atLeastOne" ? "Knowing some ace is present leaves many possible first-ace identities." : "Knowing the ace of hearts is present fixes one success and turns the question into catching at least one of the remaining three aces."}</p>
@@ -262,7 +262,7 @@ function BayesVisualiser() {
         <Slider label={`Prior P(H) = ${round(prior, 3)}`} value={prior} setValue={setPrior} min={0.01} max={0.99} step={0.01} />
         <Slider label={`P(E|H) = ${round(sensitivity, 3)}`} value={sensitivity} setValue={setSensitivity} min={0.01} max={0.99} step={0.01} />
         <Slider label={`P(E|not H) = ${round(falsePositive, 3)}`} value={falsePositive} setValue={setFalsePositive} min={0.01} max={0.99} step={0.01} />
-        <div className="rounded border border-ink/10 bg-white/70 p-4 text-sm leading-6 text-graphite">
+        <div className="rounded border border-white/10 bg-surface/75 p-4 text-sm leading-6 text-graphite">
           Posterior P(H|E) = <strong className="text-ink">{round(posterior, 5)}</strong>
         </div>
       </div>
@@ -273,7 +273,7 @@ function BayesVisualiser() {
             <XAxis type="number" />
             <YAxis dataKey="name" type="category" width={150} />
             <Tooltip />
-            <Bar dataKey="value" fill="#16816c" />
+            <Bar dataKey="value" fill="#2f6658" />
           </BarChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -310,7 +310,7 @@ function MontyHallVisualiser() {
             <XAxis dataKey="strategy" />
             <YAxis domain={[0, 1]} />
             <Tooltip />
-            <Bar dataKey="rate" fill="#b95f68" />
+            <Bar dataKey="rate" fill="#7e4048" />
           </BarChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -333,7 +333,7 @@ function DistributionExplorer() {
     <div className="space-y-5">
       <div className="grid gap-4 md:grid-cols-4">
         <Control label="Distribution">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
             {["Bernoulli", "Binomial", "Poisson", "Uniform", "Exponential", "Normal", "Chi-square", "t", "F"].map((item) => <option key={item}>{item}</option>)}
           </select>
         </Control>
@@ -349,12 +349,12 @@ function DistributionExplorer() {
               <XAxis dataKey="x" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="pdf" stroke="#16816c" dot={false} />
-              <Line type="monotone" dataKey="cdf" stroke="#b95f68" dot={false} />
+              <Line type="monotone" dataKey="pdf" stroke="#2f6658" dot={false} />
+              <Line type="monotone" dataKey="cdf" stroke="#7e4048" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </ChartBox>
-        <div className="rounded border border-ink/10 bg-white/70 p-4 text-sm leading-6 text-graphite">
+        <div className="rounded border border-white/10 bg-surface/75 p-4 text-sm leading-6 text-graphite">
           <h3 className="font-sans text-xl font-semibold text-ink">Summary</h3>
           <p className="mt-2">Mean: <strong>{summary.mean}</strong></p>
           <p>Variance: <strong>{summary.variance}</strong></p>
@@ -403,10 +403,10 @@ function PdfCdfVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Area dataKey="area" fill="#d89b38" stroke="#d89b38" />
-            <Line type="monotone" dataKey="pdf" stroke="#16816c" dot={false} />
-            <Line type="monotone" dataKey="cdf" stroke="#b95f68" dot={false} />
-            <ReferenceLine x={x} stroke="#222538" />
+            <Area dataKey="area" fill="#b07a2a" stroke="#b07a2a" />
+            <Line type="monotone" dataKey="pdf" stroke="#2f6658" dot={false} />
+            <Line type="monotone" dataKey="cdf" stroke="#7e4048" dot={false} />
+            <ReferenceLine x={x} stroke="#1f2430" />
           </AreaChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -424,22 +424,22 @@ function JointSupportVisualiser() {
   return (
     <div className="grid gap-5 md:grid-cols-[260px_1fr]">
       <Control label="Support">
-        <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={support} onChange={(event) => setSupport(event.target.value)}>
+        <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={support} onChange={(event) => setSupport(event.target.value)}>
           <option value="square">0 ≤ x ≤ 3, 0 ≤ y ≤ 3</option>
           <option value="triangle3">0 ≤ x ≤ y ≤ 3</option>
           <option value="triangle1">0 &lt; x &lt; y &lt; 1</option>
         </select>
       </Control>
       <div>
-        <svg viewBox="0 0 420 320" className="h-80 w-full rounded border border-ink/10 bg-white/70">
-          <line x1="50" y1="270" x2="370" y2="270" stroke="#222538" />
-          <line x1="50" y1="270" x2="50" y2="40" stroke="#222538" />
+        <svg viewBox="0 0 420 320" className="h-80 w-full rounded border border-white/10 bg-surface/75">
+          <line x1="50" y1="270" x2="370" y2="270" stroke="#1f2430" />
+          <line x1="50" y1="270" x2="50" y2="40" stroke="#1f2430" />
           <text x="375" y="275" fontSize="14">x</text>
           <text x="38" y="35" fontSize="14">y</text>
-          {support === "square" ? <rect x="50" y="50" width="250" height="220" fill="#16816c33" stroke="#16816c" /> : null}
-          {support === "triangle3" ? <polygon points="50,270 300,270 300,50" fill="#b95f6833" stroke="#b95f68" /> : null}
-          {support === "triangle1" ? <polygon points="50,270 300,50 300,270" fill="#d89b3833" stroke="#d89b38" /> : null}
-          <line x1="50" y1="270" x2="300" y2="50" stroke="#222538" strokeDasharray="4 4" />
+          {support === "square" ? <rect x="50" y="50" width="250" height="220" fill="#2f665833" stroke="#2f6658" /> : null}
+          {support === "triangle3" ? <polygon points="50,270 300,270 300,50" fill="#7e404833" stroke="#7e4048" /> : null}
+          {support === "triangle1" ? <polygon points="50,270 300,50 300,270" fill="#b07a2a33" stroke="#b07a2a" /> : null}
+          <line x1="50" y1="270" x2="300" y2="50" stroke="#1f2430" strokeDasharray="4 4" />
           <text x="310" y="55" fontSize="13">y=x</text>
         </svg>
         <p className="mt-3 text-sm leading-6 text-graphite">{description}</p>
@@ -462,8 +462,8 @@ function MarginalVisualiser() {
             <XAxis dataKey="y" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="joint" stroke="#16816c" dot={false} />
-            <Line dataKey="conditional" stroke="#b95f68" dot={false} />
+            <Line dataKey="joint" stroke="#2f6658" dot={false} />
+            <Line dataKey="conditional" stroke="#7e4048" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -477,12 +477,12 @@ function IndependenceVisualiser() {
   return (
     <div className="grid gap-5 md:grid-cols-2">
       <Control label="Support type">
-        <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={shape} onChange={(event) => setShape(event.target.value)}>
+        <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={shape} onChange={(event) => setShape(event.target.value)}>
           <option value="rectangle">Product rectangle</option>
           <option value="triangle">Support depends on x</option>
         </select>
       </Control>
-      <div className="rounded border border-ink/10 bg-white/70 p-4 text-sm leading-6 text-graphite">
+      <div className="rounded border border-white/10 bg-surface/75 p-4 text-sm leading-6 text-graphite">
         {shape === "rectangle" ? "A product support can be independent if the joint density factorises into an x-only part times a y-only part." : "A triangular support such as 0<x<y<1 cannot be reproduced by fX(x)fY(y), because possible y-values depend on x."}
       </div>
       <div className="md:col-span-2">
@@ -494,10 +494,10 @@ function IndependenceVisualiser() {
 
 function JointSupportMini({ triangle }: { triangle: boolean }) {
   return (
-    <svg viewBox="0 0 420 220" className="h-56 w-full rounded border border-ink/10 bg-white/70">
-      <line x1="50" y1="180" x2="360" y2="180" stroke="#222538" />
-      <line x1="50" y1="180" x2="50" y2="35" stroke="#222538" />
-      {triangle ? <polygon points="50,180 320,45 320,180" fill="#b95f6833" stroke="#b95f68" /> : <rect x="70" y="55" width="260" height="125" fill="#16816c33" stroke="#16816c" />}
+    <svg viewBox="0 0 420 220" className="h-56 w-full rounded border border-white/10 bg-surface/75">
+      <line x1="50" y1="180" x2="360" y2="180" stroke="#1f2430" />
+      <line x1="50" y1="180" x2="50" y2="35" stroke="#1f2430" />
+      {triangle ? <polygon points="50,180 320,45 320,180" fill="#7e404833" stroke="#7e4048" /> : <rect x="70" y="55" width="260" height="125" fill="#2f665833" stroke="#2f6658" />}
     </svg>
   );
 }
@@ -514,21 +514,21 @@ function TransformationVisualiser() {
         <Slider label={`v = X/(X+Y) = ${round(v, 2)}`} value={v} setValue={setV} min={0.02} max={0.98} step={0.01} />
       </div>
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded border border-ink/10 bg-white/70 p-4">Inverse: x=uv={round(x, 3)}, y=u(1-v)={round(y, 3)}</div>
-        <div className="rounded border border-ink/10 bg-white/70 p-4">Jacobian |∂(x,y)/∂(u,v)| = u = {round(u, 3)}</div>
-        <div className="rounded border border-ink/10 bg-white/70 p-4">Support: u&gt;0 and 0&lt;v&lt;1</div>
+        <div className="rounded border border-white/10 bg-surface/75 p-4">Inverse: x=uv={round(x, 3)}, y=u(1-v)={round(y, 3)}</div>
+        <div className="rounded border border-white/10 bg-surface/75 p-4">Jacobian |∂(x,y)/∂(u,v)| = u = {round(u, 3)}</div>
+        <div className="rounded border border-white/10 bg-surface/75 p-4">Support: u&gt;0 and 0&lt;v&lt;1</div>
       </div>
-      <svg viewBox="0 0 600 260" className="h-72 w-full rounded border border-ink/10 bg-white/70">
+      <svg viewBox="0 0 600 260" className="h-72 w-full rounded border border-white/10 bg-surface/75">
         <text x="90" y="25" fontSize="15">Old support (x,y)</text>
-        <line x1="60" y1="220" x2="260" y2="220" stroke="#222538" />
-        <line x1="60" y1="220" x2="60" y2="40" stroke="#222538" />
-        <rect x="60" y="40" width="180" height="180" fill="#16816c22" stroke="#16816c" />
-        <circle cx={60 + x * 28} cy={220 - y * 28} r="6" fill="#b95f68" />
+        <line x1="60" y1="220" x2="260" y2="220" stroke="#1f2430" />
+        <line x1="60" y1="220" x2="60" y2="40" stroke="#1f2430" />
+        <rect x="60" y="40" width="180" height="180" fill="#2f665822" stroke="#2f6658" />
+        <circle cx={60 + x * 28} cy={220 - y * 28} r="6" fill="#7e4048" />
         <text x="380" y="25" fontSize="15">New support (u,v)</text>
-        <line x1="340" y1="220" x2="550" y2="220" stroke="#222538" />
-        <line x1="340" y1="220" x2="340" y2="40" stroke="#222538" />
-        <rect x="350" y="50" width="190" height="170" fill="#d89b3822" stroke="#d89b38" />
-        <circle cx={350 + u * 28} cy={220 - v * 170} r="6" fill="#b95f68" />
+        <line x1="340" y1="220" x2="550" y2="220" stroke="#1f2430" />
+        <line x1="340" y1="220" x2="340" y2="40" stroke="#1f2430" />
+        <rect x="350" y="50" width="190" height="170" fill="#b07a2a22" stroke="#b07a2a" />
+        <circle cx={350 + u * 28} cy={220 - v * 170} r="6" fill="#7e4048" />
       </svg>
     </div>
   );
@@ -547,9 +547,9 @@ function ConvolutionVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="fx" stroke="#16816c" dot={false} />
-            <Line dataKey="shifted" stroke="#b95f68" dot={false} />
-            <Area dataKey="product" fill="#d89b38" stroke="#d89b38" />
+            <Line dataKey="fx" stroke="#2f6658" dot={false} />
+            <Line dataKey="shifted" stroke="#7e4048" dot={false} />
+            <Area dataKey="product" fill="#b07a2a" stroke="#b07a2a" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -574,7 +574,7 @@ function OrderStatsVisualiser() {
             <XAxis dataKey="y" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="density" stroke="#16816c" dot={false} />
+            <Line dataKey="density" stroke="#2f6658" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -592,7 +592,7 @@ function CltVisualiser() {
     <div className="space-y-5">
       <div className="grid gap-4 md:grid-cols-2">
         <Control label="Parent distribution">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
             <option value="exponential">Exponential(1)</option>
             <option value="uniform">Uniform(0,1)</option>
             <option value="bernoulli">Bernoulli(0.3)</option>
@@ -608,7 +608,7 @@ function CltVisualiser() {
               <XAxis dataKey="mean" />
               <YAxis dataKey="jitter" hide />
               <Tooltip />
-              <Scatter data={data} fill="#16816c" />
+              <Scatter data={data} fill="#2f6658" />
             </ScatterChart>
           </ResponsiveContainer>
         </ChartBox>
@@ -619,7 +619,7 @@ function CltVisualiser() {
               <XAxis dataKey="index" />
               <YAxis />
               <Tooltip />
-              <Line dataKey="avg" stroke="#b95f68" dot={false} />
+              <Line dataKey="avg" stroke="#7e4048" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </ChartBox>
@@ -657,9 +657,9 @@ function EstimatorVisualiser() {
             <XAxis dataKey="n" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="unbiased" stroke="#16816c" dot={false} />
-            <Line dataKey="biasedConsistent" stroke="#d89b38" dot={false} />
-            <Line dataKey="inconsistent" stroke="#b95f68" dot={false} />
+            <Line dataKey="unbiased" stroke="#2f6658" dot={false} />
+            <Line dataKey="biasedConsistent" stroke="#b07a2a" dot={false} />
+            <Line dataKey="inconsistent" stroke="#7e4048" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -677,7 +677,7 @@ function LikelihoodVisualiser() {
     <div className="space-y-5">
       <div className="grid gap-4 md:grid-cols-2">
         <Control label="Model">
-          <select className="w-full rounded border border-ink/15 bg-white px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
+          <select className="w-full rounded border border-white/15 bg-surface px-3 py-2" value={dist} onChange={(event) => setDist(event.target.value)}>
             <option value="poisson">Poisson λ</option>
             <option value="bernoulli">Bernoulli p</option>
           </select>
@@ -691,8 +691,8 @@ function LikelihoodVisualiser() {
             <XAxis dataKey="theta" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="logLikelihood" stroke="#16816c" dot={false} />
-            <ReferenceLine x={mle} stroke="#b95f68" />
+            <Line dataKey="logLikelihood" stroke="#2f6658" dot={false} />
+            <ReferenceLine x={mle} stroke="#7e4048" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -716,7 +716,7 @@ function ConfidenceIntervalVisualiser() {
         <Slider label={`n = ${n}`} value={n} setValue={setN} min={5} max={100} step={1} />
         <Slider label={`confidence = ${round(confidence, 2)}`} value={confidence} setValue={setConfidence} min={0.8} max={0.99} step={0.01} />
       </div>
-      <div className="rounded border border-ink/10 bg-white/70 p-4 text-sm">Simulated coverage in this batch: {round(coverage, 3)}</div>
+      <div className="rounded border border-white/10 bg-surface/75 p-4 text-sm">Simulated coverage in this batch: {round(coverage, 3)}</div>
       <ChartBox height={380}>
         <ResponsiveContainer>
           <ScatterChart>
@@ -724,9 +724,9 @@ function ConfidenceIntervalVisualiser() {
             <XAxis dataKey="i" />
             <YAxis domain={[-1.2, 1.2]} />
             <Tooltip />
-            <ReferenceLine y={0} stroke="#222538" />
+            <ReferenceLine y={0} stroke="#1f2430" />
             <Scatter data={intervals.flatMap((d) => [{ i: d.i, y: d.lower, covers: d.covers }, { i: d.i, y: d.upper, covers: d.covers }])}>
-              {intervals.flatMap((d) => [d, d]).map((d, index) => <Cell key={index} fill={d.covers ? "#16816c" : "#b95f68"} />)}
+              {intervals.flatMap((d) => [d, d]).map((d, index) => <Cell key={index} fill={d.covers ? "#2f6658" : "#7e4048"} />)}
             </Scatter>
           </ScatterChart>
         </ResponsiveContainer>
@@ -753,10 +753,10 @@ function HypothesisVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Area dataKey="rejection" fill="#b95f68" stroke="#b95f68" />
-            <Line dataKey="density" stroke="#16816c" dot={false} />
-            <ReferenceLine x={critical} stroke="#222538" label="critical" />
-            <ReferenceLine x={z} stroke="#d89b38" label="observed" />
+            <Area dataKey="rejection" fill="#7e4048" stroke="#7e4048" />
+            <Line dataKey="density" stroke="#2f6658" dot={false} />
+            <ReferenceLine x={critical} stroke="#1f2430" label="critical" />
+            <ReferenceLine x={z} stroke="#b07a2a" label="observed" />
           </AreaChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -778,7 +778,7 @@ function PowerVisualiser() {
         <Slider label={`sigma = ${sigma}`} value={sigma} setValue={setSigma} min={1} max={8} step={0.1} />
         <Slider label={`alpha = ${round(alpha, 2)}`} value={alpha} setValue={setAlpha} min={0.01} max={0.2} step={0.01} />
       </div>
-      <div className="rounded border border-ink/10 bg-white/70 p-3 text-sm">Critical c for H0: μ=10 is {round(c, 4)}.</div>
+      <div className="rounded border border-white/10 bg-surface/75 p-3 text-sm">Critical c for H0: μ=10 is {round(c, 4)}.</div>
       <ChartBox>
         <ResponsiveContainer>
           <LineChart data={data}>
@@ -786,8 +786,8 @@ function PowerVisualiser() {
             <XAxis dataKey="mu" />
             <YAxis domain={[0, 1]} />
             <Tooltip />
-            <Line dataKey="power" stroke="#b95f68" dot={false} />
-            <ReferenceLine x={10} stroke="#222538" />
+            <Line dataKey="power" stroke="#7e4048" dot={false} />
+            <ReferenceLine x={10} stroke="#1f2430" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -809,7 +809,7 @@ function DeltaVisualiser() {
         <Slider label={`sigma = ${round(sigma, 2)}`} value={sigma} setValue={setSigma} min={0.5} max={8} step={0.1} />
         <Slider label={`n = ${n}`} value={n} setValue={setN} min={10} max={300} step={1} />
       </div>
-      <div className="rounded border border-ink/10 bg-white/70 p-3 text-sm">For g(μ)=1/μ, g'(μ)={round(derivative, 5)} and approximate SE of g(Xbar) is {round(transformedSe, 5)}.</div>
+      <div className="rounded border border-white/10 bg-surface/75 p-3 text-sm">For g(μ)=1/μ, g'(μ)={round(derivative, 5)} and approximate SE of g(Xbar) is {round(transformedSe, 5)}.</div>
       <ChartBox>
         <ResponsiveContainer>
           <LineChart data={data}>
@@ -817,9 +817,9 @@ function DeltaVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="gx" stroke="#16816c" dot={false} />
-            <Line dataKey="tangent" stroke="#b95f68" dot={false} />
-            <ReferenceLine x={mu} stroke="#222538" />
+            <Line dataKey="gx" stroke="#2f6658" dot={false} />
+            <Line dataKey="tangent" stroke="#7e4048" dot={false} />
+            <ReferenceLine x={mu} stroke="#1f2430" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>

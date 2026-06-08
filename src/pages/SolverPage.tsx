@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { MathBlock } from "../components/MathBlock";
 import { PageHeader } from "../components/PageHeader";
 import { SolutionSteps } from "../components/SolutionSteps";
+import { answerStatsQuestion } from "../lib/studyAssistant";
 import { solve, solverLabels, type SolverInputs, type SolverKind } from "../lib/solvers";
 
 const defaults: Record<SolverKind, SolverInputs> = {
@@ -50,7 +53,9 @@ export function SolverPage() {
   const [values, setValues] = useState<SolverInputs>(defaults["z-test"]);
   const [question, setQuestion] = useState("");
   const [suggested, setSuggested] = useState<SolverKind | null>(null);
+  const [coachQuestion, setCoachQuestion] = useState("A sample mean is used to test H0: mu = 720 against HA: mu > 720. The population sigma is known. How do I solve it?");
   const steps = useMemo(() => solve(kind, values), [kind, values]);
+  const coach = useMemo(() => answerStatsQuestion(coachQuestion), [coachQuestion]);
 
   const selectKind = (next: SolverKind) => {
     setKind(next);
@@ -77,27 +82,73 @@ export function SolverPage() {
     <div>
       <PageHeader
         eyebrow="Question solver workbench"
-        title="Build the solution skeleton before calculating"
-        description="Paste wording for an archetype suggestion, then enter the required values. The workbench runs fully offline and produces an exam-ready method."
+        title="Ask, classify, then calculate"
+        description="The local Stats Coach reads the wording, recognises the archetype, explains why the formula applies, and points you to matching solved problems. The calculator below handles exact numerical workflows."
       />
-      <div className="grid gap-5 lg:grid-cols-[340px_1fr]">
+      <section className="paper-card mb-6 rounded-2xl p-5">
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <label className="text-xs uppercase tracking-[0.14em] text-brass">
+              Ask the local Stats Coach
+              <textarea
+                className="soft-input mt-2 h-36 w-full rounded-xl px-4 py-3 text-sm normal-case leading-6 tracking-normal text-ink"
+                value={coachQuestion}
+                onChange={(event) => setCoachQuestion(event.target.value)}
+              />
+            </label>
+            <p className="mt-3 text-xs leading-5 text-graphite">
+              Works fully offline. For a true LLM chat later, add a small backend proxy and call it from here; do not expose a private API key in a public browser build.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Detected path</div>
+              <h2 className="mt-2 text-2xl font-semibold text-ink">{coach.archetype.title}</h2>
+              <p className="mt-2 text-sm leading-7 text-graphite">{coach.summary}</p>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-paper/45 p-4">
+                <h3 className="text-sm font-semibold text-ink">What to do first</h3>
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-graphite">
+                  {coach.method.slice(0, 5).map((step) => <li key={step}>{step}</li>)}
+                </ol>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-paper/45 p-4">
+                <h3 className="text-sm font-semibold text-ink">Closest solved problems</h3>
+                <div className="mt-3 space-y-2">
+                  {coach.relatedProblems.map((problem) => (
+                    <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded-lg border border-white/10 px-3 py-2 text-sm text-graphite hover:border-teal/30 hover:text-ink">
+                      {problem.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {coach.formulae[0] ? (
+              <MathBlock formula={coach.formulae[0].formula} note={`${coach.formulae[0].title}: ${coach.formulae[0].when}`} />
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
         <aside className="space-y-4">
-          <div className="paper-card rounded p-4">
+          <div className="paper-card rounded-2xl p-5">
             <label className="text-xs uppercase tracking-[0.14em] text-brass">
               Paste question wording
-              <textarea className="soft-input mt-2 h-32 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
+              <textarea className="soft-input mt-2 h-32 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
             </label>
-            <button className="focus-ring mt-3 w-full rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-colour" onClick={suggest}>Suggest archetype</button>
+            <button className="focus-ring mt-3 w-full rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-soft" onClick={suggest}>Suggest archetype</button>
             {suggested ? (
-              <button className="focus-ring mt-3 w-full rounded border border-teal/25 bg-teal/10 px-3 py-2 text-left text-sm text-forest" onClick={() => selectKind(suggested)}>
+              <button className="focus-ring mt-3 w-full rounded border border-forest/20 bg-surface/80 px-3 py-2 text-left text-sm text-forest" onClick={() => selectKind(suggested)}>
                 Suggested: {solverLabels[suggested]}
               </button>
             ) : null}
           </div>
-          <div className="paper-card rounded p-4">
+          <div className="paper-card rounded-2xl p-5">
             <label className="text-xs uppercase tracking-[0.14em] text-brass">
               Guided calculator
-              <select className="soft-input mt-2 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
+              <select className="soft-input mt-2 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
                 {(Object.keys(solverLabels) as SolverKind[]).map((item) => <option key={item} value={item}>{solverLabels[item]}</option>)}
               </select>
             </label>
@@ -106,26 +157,26 @@ export function SolverPage() {
                 <label key={field} className="block text-xs uppercase tracking-[0.12em] text-brass">
                   {fieldLabels[field] ?? field}
                   {field === "tail" ? (
-                    <select className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
+                    <select className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
                       <option value="greater">greater than</option>
                       <option value="less">less than</option>
                       <option value="two-sided">two-sided</option>
                     </select>
                   ) : (
-                    <input type="number" step="any" className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
+                    <input type="number" step="any" className="soft-input mt-1 w-full rounded-xl px-3 py-2 text-sm normal-case tracking-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
                   )}
                 </label>
               ))}
             </div>
           </div>
         </aside>
-        <section className="paper-card rounded p-5">
+        <section className="paper-card rounded-2xl p-6">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Generated answer format</div>
           <h2 className="mt-2 font-sans text-3xl font-semibold text-ink">{solverLabels[kind]}</h2>
           <div className="mt-5">
             <SolutionSteps steps={steps} />
           </div>
-          <div className="mt-6 rounded border border-honey/30 bg-honey/10 p-4 text-sm leading-6 text-graphite">
+          <div className="mt-6 rounded border border-brass/20 bg-surface/80 p-4 text-sm leading-6 text-graphite">
             In an exam, define variables and state assumptions before substituting. For tests, include H0, HA, statistic, null distribution, alpha, rejection rule, computed value and conclusion.
           </div>
         </section>

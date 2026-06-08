@@ -67,22 +67,22 @@ export function ExamModePage() {
         <div className="grid gap-4 md:grid-cols-4">
           <label className="text-xs uppercase tracking-[0.14em] text-brass">
             Mode
-            <select className="mt-1 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={mode} onChange={(event) => setMode(event.target.value)}>
+            <select className="mt-1 w-full rounded border border-white/15 bg-surface px-3 py-2 text-sm normal-case tracking-normal text-ink" value={mode} onChange={(event) => setMode(event.target.value)}>
               {modes.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
             </select>
           </label>
           {mode === "topic" ? (
             <label className="text-xs uppercase tracking-[0.14em] text-brass">
               Topic
-              <select className="mt-1 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={topic} onChange={(event) => setTopic(event.target.value)}>
+              <select className="mt-1 w-full rounded border border-white/15 bg-surface px-3 py-2 text-sm normal-case tracking-normal text-ink" value={topic} onChange={(event) => setTopic(event.target.value)}>
                 {["probability", "joint", "transformation", "CLT", "MLE", "confidence", "hypothesis", "power"].map((item) => <option key={item}>{item}</option>)}
               </select>
             </label>
           ) : <div />}
-          <div className="rounded border border-ink/10 bg-white/70 px-3 py-2 text-sm">
+          <div className="rounded border border-white/10 bg-surface/75 px-3 py-2 text-sm">
             Time: <strong className={seconds < 300 ? "text-oxblood" : "text-ink"}>{formatTime(seconds)}</strong>
           </div>
-          <button className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-colour" onClick={() => setStarted((value) => !value)}>
+          <button className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-soft" onClick={() => setStarted((value) => !value)}>
             {started ? "Pause timer" : "Start timer"}
           </button>
         </div>
@@ -100,12 +100,12 @@ export function ExamModePage() {
             <h2 className="font-sans text-2xl font-semibold text-ink">Step-by-step hints</h2>
             <div className="mt-4 space-y-3">
               {question.solution.slice(0, revealedHints).map((step, index) => (
-                <div key={step} className="rounded border border-ink/10 bg-white/70 p-3 text-sm leading-6 text-graphite">
+                <div key={step} className="rounded border border-white/10 bg-surface/75 p-3 text-sm leading-6 text-graphite">
                   Hint {index + 1}: {softenHint(step)}
                 </div>
               ))}
               {revealedHints < Math.min(3, question.solution.length) ? (
-                <button className="focus-ring rounded border border-ink/15 bg-white px-3 py-2 text-sm" onClick={() => setRevealedHints((value) => value + 1)}>
+                <button className="focus-ring rounded border border-white/15 bg-surface px-3 py-2 text-sm" onClick={() => setRevealedHints((value) => value + 1)}>
                   Reveal next hint
                 </button>
               ) : null}
@@ -131,7 +131,7 @@ export function ExamModePage() {
             <p className="mt-2 text-sm leading-6 text-graphite">0: no method, 1: correct archetype, 2: formula, 3: intermediate steps, 4: complete exam answer.</p>
             <div className="mt-3 grid grid-cols-5 gap-2">
               {[0, 1, 2, 3, 4].map((score) => (
-                <button key={score} className={`focus-ring rounded border px-2 py-2 ${scores[question.id] === score ? "border-teal bg-teal text-white shadow-soft" : "border-ocean/15 bg-white/80"}`} onClick={() => setScores((old) => ({ ...old, [question.id]: score }))}>
+                <button key={score} className={`focus-ring rounded border px-2 py-2 ${scores[question.id] === score ? "border-teal bg-teal text-white shadow-soft" : "border-ocean/15 bg-surface/80"}`} onClick={() => setScores((old) => ({ ...old, [question.id]: score }))}>
                   {score}
                 </button>
               ))}
@@ -141,7 +141,7 @@ export function ExamModePage() {
             <h2 className="font-sans text-xl font-semibold text-ink">Mistake log</h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {["wrong distribution", "wrong limits", "critical value", "algebra", "conclusion", "time"].map((mistake) => (
-                <button key={mistake} className={`focus-ring rounded px-2 py-1 text-xs ${mistakes.includes(mistake) ? "bg-blush text-white shadow-soft" : "border border-ocean/15 bg-white/80"}`} onClick={() => setMistakes((old) => old.includes(mistake) ? old.filter((item) => item !== mistake) : [...old, mistake])}>
+                <button key={mistake} className={`focus-ring rounded px-2 py-1 text-xs ${mistakes.includes(mistake) ? "bg-blush text-white shadow-soft" : "border border-ocean/15 bg-surface/80"}`} onClick={() => setMistakes((old) => old.includes(mistake) ? old.filter((item) => item !== mistake) : [...old, mistake])}>
                   {mistake}
                 </button>
               ))}
@@ -152,8 +152,8 @@ export function ExamModePage() {
             <p className="mt-2"><strong className="text-ink">Revision recommendation:</strong> {recommend(mistakes)}</p>
           </div>
           <div className="flex gap-2">
-            <button disabled={current === 0} className="focus-ring flex-1 rounded border border-ink/15 bg-white px-3 py-2 text-sm disabled:opacity-40" onClick={() => move(-1)}>Previous</button>
-            <button disabled={current === questions.length - 1} className="focus-ring flex-1 rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-colour disabled:opacity-40" onClick={() => move(1)}>Next</button>
+            <button disabled={current === 0} className="focus-ring flex-1 rounded border border-white/15 bg-surface px-3 py-2 text-sm disabled:opacity-40" onClick={() => move(-1)}>Previous</button>
+            <button disabled={current === questions.length - 1} className="focus-ring flex-1 rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-soft disabled:opacity-40" onClick={() => move(1)}>Next</button>
           </div>
         </aside>
       </div>

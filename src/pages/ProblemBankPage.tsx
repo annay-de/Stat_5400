@@ -52,7 +52,7 @@ export function ProblemBankPage() {
           <div key={problem.id} className="relative">
             <ProblemCard problem={problem} />
             <button
-              className={`focus-ring absolute bottom-3 right-3 rounded px-2 py-1 text-xs ${solved[problem.id] ? "bg-accent-hero text-white shadow-soft" : "border border-ocean/15 bg-white/80 text-graphite"}`}
+              className={`focus-ring absolute bottom-3 right-3 rounded px-2 py-1 text-xs ${solved[problem.id] ? "bg-accent-hero text-white shadow-soft" : "border border-ocean/15 bg-surface/80 text-graphite"}`}
               onClick={() => toggleSolved(problem.id)}
             >
               {solved[problem.id] ? "Solved" : "Mark solved"}

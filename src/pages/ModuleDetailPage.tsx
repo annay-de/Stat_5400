@@ -52,7 +52,7 @@ export function ModuleDetailPage() {
             <h2 className="font-sans text-xl font-semibold text-ink">Worked examples</h2>
             <div className="mt-4 space-y-3">
               {related.map((problem) => (
-                <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded border border-ink/10 bg-white/70 p-3 text-sm hover:border-forest/40">
+                <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded border border-white/10 bg-surface/75 p-3 text-sm hover:border-forest/40">
                   <div className="font-medium text-ink">{problem.title}</div>
                   <div className="mt-1 text-xs text-graphite">{problem.source} · {problem.number}</div>
                 </Link>

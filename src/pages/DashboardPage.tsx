@@ -5,21 +5,21 @@ import { problemBank } from "../data/problemBank";
 import { studyPlan } from "../data/studyPlan";
 
 const shortcuts = [
-  { label: "Start Today", to: "/modules/probability", icon: BookMarked, tone: "bg-teal/10 text-forest border-teal/20" },
-  { label: "Final Exam Mode", to: "/exam-mode", icon: Timer, tone: "bg-blush/10 text-oxblood border-blush/20" },
-  { label: "Problem Bank", to: "/problem-bank", icon: ListChecks, tone: "bg-ocean/10 text-ocean border-ocean/20" },
-  { label: "Formula and Method Sheet", to: "/formula-sheet", icon: Sigma, tone: "bg-honey/10 text-brass border-honey/25" },
-  { label: "Visual Playgrounds", to: "/visual-lab", icon: FlaskConical, tone: "bg-lavender text-slateblue border-slateblue/15" },
+  { label: "Start Today", to: "/modules/probability", icon: BookMarked, tone: "bg-surface/80 text-forest border-forest/20" },
+  { label: "Final Exam Mode", to: "/exam-mode", icon: Timer, tone: "bg-surface/80 text-oxblood border-oxblood/20" },
+  { label: "Problem Bank", to: "/problem-bank", icon: ListChecks, tone: "bg-surface/80 text-ocean border-ocean/20" },
+  { label: "Formula and Method Sheet", to: "/formula-sheet", icon: Sigma, tone: "bg-surface/80 text-brass border-brass/25" },
+  { label: "Visual Playgrounds", to: "/visual-lab", icon: FlaskConical, tone: "bg-surface/80 text-slateblue border-slateblue/20" },
 ];
 
 const dayTones = [
-  "border-ocean/20 bg-ocean/10 text-ocean",
-  "border-teal/20 bg-teal/10 text-forest",
-  "border-honey/25 bg-honey/10 text-brass",
-  "border-blush/20 bg-blush/10 text-oxblood",
-  "border-slateblue/20 bg-lavender text-slateblue",
-  "border-forest/20 bg-sage text-forest",
-  "border-ink/10 bg-quiet-band text-ink",
+  "border-ocean/20 bg-surface/80 text-ocean",
+  "border-forest/20 bg-surface/80 text-forest",
+  "border-brass/25 bg-surface/80 text-brass",
+  "border-oxblood/20 bg-surface/80 text-oxblood",
+  "border-slateblue/20 bg-surface/80 text-slateblue",
+  "border-forest/20 bg-surface/80 text-forest",
+  "border-white/15 bg-surface/80 text-ink",
 ];
 
 export function DashboardPage() {
@@ -27,28 +27,28 @@ export function DashboardPage() {
   const hardProblems = problemBank.filter((problem) => problem.difficulty === "Hard" || problem.difficulty === "Exam").length;
 
   return (
-    <div className="space-y-8">
-      <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="hero-glass flex min-h-[420px] flex-col justify-between rounded-md p-6">
+    <div className="space-y-10">
+      <section className="grid gap-7 lg:grid-cols-[1.25fr_0.75fr]">
+        <div className="hero-glass flex min-h-[440px] flex-col justify-between rounded-2xl p-7 md:p-9">
           <div>
-            <div className="inline-flex rounded-full border border-ocean/15 bg-ocean/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-ocean">
+            <div className="inline-flex rounded-full border border-ocean/20 bg-surface/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-ocean">
               One-week intensive study system
             </div>
-            <h1 className="mt-5 max-w-3xl font-sans text-4xl font-semibold leading-tight text-ink md:text-6xl">
+            <h1 className="mt-6 max-w-3xl font-sans text-4xl font-semibold leading-tight text-ink md:text-6xl">
               Statistics Mastery Lab
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-graphite">
-              A visual and mathematical cockpit for probability, distributions, inference, asymptotics and exam-style problem solving.
+            <p className="mt-5 max-w-2xl text-base leading-8 text-graphite">
+              A dark, visual statistics workspace for learning why each method exists, when to use it, and how to turn a question into a clean exam solution.
             </p>
           </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {shortcuts.map((item) => {
               const Icon = item.icon;
               return (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`focus-ring flex items-center justify-between rounded-md border px-4 py-3 text-sm transition hover:-translate-y-0.5 hover:bg-white/80 hover:shadow-soft ${item.tone}`}
+                  className={`focus-ring flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition hover:-translate-y-0.5 hover:bg-mist hover:shadow-soft ${item.tone}`}
                 >
                   <span className="flex items-center gap-2">
                     <Icon size={17} />
@@ -60,7 +60,7 @@ export function DashboardPage() {
             })}
           </div>
         </div>
-        <div className="grid content-start gap-4">
+        <div className="grid content-start gap-5">
           <StatCard label="Problem bank" value={`${problemBank.length} encoded`} detail="All problem sets, discussions and sample final questions are represented with solutions." />
           <StatCard label="Final emphasis" value={`${finalProblems} final-grade drills`} detail="Inference, MLE, Delta Method, F-tests and power are prioritised for Day 7." />
           <StatCard label="Hard questions" value={`${hardProblems} high-friction items`} detail="Transformation, joint densities, asymptotics and exam inference are surfaced for repeated practice." />
@@ -73,13 +73,13 @@ export function DashboardPage() {
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">One-week emergency plan</div>
             <h2 className="mt-1 font-sans text-3xl font-semibold text-ink">Seven days, no wandering</h2>
           </div>
-          <Link to="/survival-sheet" className="focus-ring hidden rounded bg-accent-hero px-4 py-2 text-sm font-medium text-white shadow-colour sm:inline-flex">
+          <Link to="/survival-sheet" className="focus-ring hidden rounded bg-accent-hero px-4 py-2 text-sm font-medium text-white shadow-soft sm:inline-flex">
             Final survival sheet
           </Link>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-7">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
           {studyPlan.map((day, index) => (
-            <article key={day.day} className="paper-card accent-strip rounded p-4">
+            <article key={day.day} className="paper-card accent-strip rounded-2xl p-5">
               <div className="flex items-center justify-between gap-3">
                 <span className={`flex h-9 w-9 items-center justify-center rounded border font-sans text-lg font-semibold ${dayTones[index % dayTones.length]}`}>
                   {day.day}
