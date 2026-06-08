@@ -71,7 +71,7 @@ export function VisualLabPage() {
             <button
               key={item}
               className={`focus-ring mb-2 flex w-full items-center gap-3 rounded px-3 py-2 text-left text-sm ${
-                active === item ? "bg-ink text-paper" : "bg-white/65 text-graphite hover:bg-white"
+                active === item ? "bg-accent-hero text-white shadow-colour" : "bg-white/70 text-graphite hover:bg-white"
               }`}
               onClick={() => setActive(item)}
             >
@@ -83,7 +83,7 @@ export function VisualLabPage() {
           ))}
         </aside>
         <section className="paper-card min-h-[620px] rounded p-5">
-          <h2 className="font-serif text-3xl font-semibold text-ink">{active}</h2>
+          <h2 className="font-sans text-3xl font-semibold text-ink">{active}</h2>
           <div className="mt-5">
             <Playground name={active} />
           </div>
@@ -139,7 +139,7 @@ function NumberInput({ value, setValue, min, max, step = 1 }: { value: number; s
 }
 
 function ChartBox({ children, height = 320 }: { children: React.ReactNode; height?: number }) {
-  return <div style={{ height }} className="rounded border border-ink/10 bg-white/70 p-3">{children}</div>;
+  return <div style={{ height }} className="rounded border border-ocean/15 bg-white/75 p-3 shadow-soft">{children}</div>;
 }
 
 function DiceVisualiser() {
@@ -182,7 +182,7 @@ function DiceVisualiser() {
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Bar dataKey="count">
-              {chart.map((row) => <Cell key={row.sum} fill={row.selected ? "#7f312f" : "#1f5a4a"} />)}
+              {chart.map((row) => <Cell key={row.sum} fill={row.selected ? "#b95f68" : "#16816c"} />)}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -191,7 +191,7 @@ function DiceVisualiser() {
         <div className="grid grid-cols-4 gap-2 text-xs sm:grid-cols-6 md:grid-cols-9">
           {outcomes.map((roll) => {
             const selected = diceEvent(roll, event);
-            return <span key={roll.join("-")} className={`rounded px-2 py-1 text-center ${selected ? "bg-oxblood text-white" : "bg-paper text-graphite"}`}>{roll.join(",")}</span>;
+            return <span key={roll.join("-")} className={`rounded px-2 py-1 text-center ${selected ? "bg-blush text-white" : "bg-paper text-graphite"}`}>{roll.join(",")}</span>;
           })}
         </div>
       </div>
@@ -230,12 +230,12 @@ function CardsVisualiser() {
           {Array.from({ length: 52 }, (_, index) => {
             const isAce = index < 4;
             const fixed = known === "aceHearts" && index === 0;
-            return <div key={index} className={`h-10 rounded border text-center text-xs leading-10 ${fixed ? "border-oxblood bg-oxblood text-white" : isAce ? "border-brass bg-brass/20 text-ink" : "border-ink/10 bg-paper text-graphite"}`}>{isAce ? "A" : ""}</div>;
+            return <div key={index} className={`h-10 rounded border text-center text-xs leading-10 ${fixed ? "border-blush bg-blush text-white" : isAce ? "border-honey bg-honey/20 text-ink" : "border-ink/10 bg-paper text-graphite"}`}>{isAce ? "A" : ""}</div>;
           })}
         </div>
       </div>
       <div className="rounded border border-ink/10 bg-white/70 p-4">
-        <h3 className="font-serif text-xl font-semibold text-ink">Conditional sample space</h3>
+        <h3 className="font-sans text-xl font-semibold text-ink">Conditional sample space</h3>
         <p className="mt-3 text-sm leading-6 text-graphite">Probability of at least two aces under this condition: <strong className="text-ink">{round(result, 5)}</strong>.</p>
         <p className="mt-3 text-sm leading-6 text-graphite">{known === "atLeastOne" ? "Knowing some ace is present leaves many possible first-ace identities." : "Knowing the ace of hearts is present fixes one success and turns the question into catching at least one of the remaining three aces."}</p>
       </div>
@@ -273,7 +273,7 @@ function BayesVisualiser() {
             <XAxis type="number" />
             <YAxis dataKey="name" type="category" width={150} />
             <Tooltip />
-            <Bar dataKey="value" fill="#1f5a4a" />
+            <Bar dataKey="value" fill="#16816c" />
           </BarChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -310,7 +310,7 @@ function MontyHallVisualiser() {
             <XAxis dataKey="strategy" />
             <YAxis domain={[0, 1]} />
             <Tooltip />
-            <Bar dataKey="rate" fill="#7f312f" />
+            <Bar dataKey="rate" fill="#b95f68" />
           </BarChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -349,13 +349,13 @@ function DistributionExplorer() {
               <XAxis dataKey="x" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="pdf" stroke="#1f5a4a" dot={false} />
-              <Line type="monotone" dataKey="cdf" stroke="#7f312f" dot={false} />
+              <Line type="monotone" dataKey="pdf" stroke="#16816c" dot={false} />
+              <Line type="monotone" dataKey="cdf" stroke="#b95f68" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </ChartBox>
         <div className="rounded border border-ink/10 bg-white/70 p-4 text-sm leading-6 text-graphite">
-          <h3 className="font-serif text-xl font-semibold text-ink">Summary</h3>
+          <h3 className="font-sans text-xl font-semibold text-ink">Summary</h3>
           <p className="mt-2">Mean: <strong>{summary.mean}</strong></p>
           <p>Variance: <strong>{summary.variance}</strong></p>
           <p>Typical 95% critical: <strong>{summary.critical}</strong></p>
@@ -403,10 +403,10 @@ function PdfCdfVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Area dataKey="area" fill="#a47c39" stroke="#a47c39" />
-            <Line type="monotone" dataKey="pdf" stroke="#1f5a4a" dot={false} />
-            <Line type="monotone" dataKey="cdf" stroke="#7f312f" dot={false} />
-            <ReferenceLine x={x} stroke="#25221d" />
+            <Area dataKey="area" fill="#d89b38" stroke="#d89b38" />
+            <Line type="monotone" dataKey="pdf" stroke="#16816c" dot={false} />
+            <Line type="monotone" dataKey="cdf" stroke="#b95f68" dot={false} />
+            <ReferenceLine x={x} stroke="#222538" />
           </AreaChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -432,14 +432,14 @@ function JointSupportVisualiser() {
       </Control>
       <div>
         <svg viewBox="0 0 420 320" className="h-80 w-full rounded border border-ink/10 bg-white/70">
-          <line x1="50" y1="270" x2="370" y2="270" stroke="#25221d" />
-          <line x1="50" y1="270" x2="50" y2="40" stroke="#25221d" />
+          <line x1="50" y1="270" x2="370" y2="270" stroke="#222538" />
+          <line x1="50" y1="270" x2="50" y2="40" stroke="#222538" />
           <text x="375" y="275" fontSize="14">x</text>
           <text x="38" y="35" fontSize="14">y</text>
-          {support === "square" ? <rect x="50" y="50" width="250" height="220" fill="#1f5a4a33" stroke="#1f5a4a" /> : null}
-          {support === "triangle3" ? <polygon points="50,270 300,270 300,50" fill="#7f312f33" stroke="#7f312f" /> : null}
-          {support === "triangle1" ? <polygon points="50,270 300,50 300,270" fill="#a47c3933" stroke="#a47c39" /> : null}
-          <line x1="50" y1="270" x2="300" y2="50" stroke="#25221d" strokeDasharray="4 4" />
+          {support === "square" ? <rect x="50" y="50" width="250" height="220" fill="#16816c33" stroke="#16816c" /> : null}
+          {support === "triangle3" ? <polygon points="50,270 300,270 300,50" fill="#b95f6833" stroke="#b95f68" /> : null}
+          {support === "triangle1" ? <polygon points="50,270 300,50 300,270" fill="#d89b3833" stroke="#d89b38" /> : null}
+          <line x1="50" y1="270" x2="300" y2="50" stroke="#222538" strokeDasharray="4 4" />
           <text x="310" y="55" fontSize="13">y=x</text>
         </svg>
         <p className="mt-3 text-sm leading-6 text-graphite">{description}</p>
@@ -462,8 +462,8 @@ function MarginalVisualiser() {
             <XAxis dataKey="y" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="joint" stroke="#1f5a4a" dot={false} />
-            <Line dataKey="conditional" stroke="#7f312f" dot={false} />
+            <Line dataKey="joint" stroke="#16816c" dot={false} />
+            <Line dataKey="conditional" stroke="#b95f68" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -495,9 +495,9 @@ function IndependenceVisualiser() {
 function JointSupportMini({ triangle }: { triangle: boolean }) {
   return (
     <svg viewBox="0 0 420 220" className="h-56 w-full rounded border border-ink/10 bg-white/70">
-      <line x1="50" y1="180" x2="360" y2="180" stroke="#25221d" />
-      <line x1="50" y1="180" x2="50" y2="35" stroke="#25221d" />
-      {triangle ? <polygon points="50,180 320,45 320,180" fill="#7f312f33" stroke="#7f312f" /> : <rect x="70" y="55" width="260" height="125" fill="#1f5a4a33" stroke="#1f5a4a" />}
+      <line x1="50" y1="180" x2="360" y2="180" stroke="#222538" />
+      <line x1="50" y1="180" x2="50" y2="35" stroke="#222538" />
+      {triangle ? <polygon points="50,180 320,45 320,180" fill="#b95f6833" stroke="#b95f68" /> : <rect x="70" y="55" width="260" height="125" fill="#16816c33" stroke="#16816c" />}
     </svg>
   );
 }
@@ -520,15 +520,15 @@ function TransformationVisualiser() {
       </div>
       <svg viewBox="0 0 600 260" className="h-72 w-full rounded border border-ink/10 bg-white/70">
         <text x="90" y="25" fontSize="15">Old support (x,y)</text>
-        <line x1="60" y1="220" x2="260" y2="220" stroke="#25221d" />
-        <line x1="60" y1="220" x2="60" y2="40" stroke="#25221d" />
-        <rect x="60" y="40" width="180" height="180" fill="#1f5a4a22" stroke="#1f5a4a" />
-        <circle cx={60 + x * 28} cy={220 - y * 28} r="6" fill="#7f312f" />
+        <line x1="60" y1="220" x2="260" y2="220" stroke="#222538" />
+        <line x1="60" y1="220" x2="60" y2="40" stroke="#222538" />
+        <rect x="60" y="40" width="180" height="180" fill="#16816c22" stroke="#16816c" />
+        <circle cx={60 + x * 28} cy={220 - y * 28} r="6" fill="#b95f68" />
         <text x="380" y="25" fontSize="15">New support (u,v)</text>
-        <line x1="340" y1="220" x2="550" y2="220" stroke="#25221d" />
-        <line x1="340" y1="220" x2="340" y2="40" stroke="#25221d" />
-        <rect x="350" y="50" width="190" height="170" fill="#a47c3922" stroke="#a47c39" />
-        <circle cx={350 + u * 28} cy={220 - v * 170} r="6" fill="#7f312f" />
+        <line x1="340" y1="220" x2="550" y2="220" stroke="#222538" />
+        <line x1="340" y1="220" x2="340" y2="40" stroke="#222538" />
+        <rect x="350" y="50" width="190" height="170" fill="#d89b3822" stroke="#d89b38" />
+        <circle cx={350 + u * 28} cy={220 - v * 170} r="6" fill="#b95f68" />
       </svg>
     </div>
   );
@@ -547,9 +547,9 @@ function ConvolutionVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="fx" stroke="#1f5a4a" dot={false} />
-            <Line dataKey="shifted" stroke="#7f312f" dot={false} />
-            <Area dataKey="product" fill="#a47c39" stroke="#a47c39" />
+            <Line dataKey="fx" stroke="#16816c" dot={false} />
+            <Line dataKey="shifted" stroke="#b95f68" dot={false} />
+            <Area dataKey="product" fill="#d89b38" stroke="#d89b38" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -574,7 +574,7 @@ function OrderStatsVisualiser() {
             <XAxis dataKey="y" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="density" stroke="#1f5a4a" dot={false} />
+            <Line dataKey="density" stroke="#16816c" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -608,7 +608,7 @@ function CltVisualiser() {
               <XAxis dataKey="mean" />
               <YAxis dataKey="jitter" hide />
               <Tooltip />
-              <Scatter data={data} fill="#1f5a4a" />
+              <Scatter data={data} fill="#16816c" />
             </ScatterChart>
           </ResponsiveContainer>
         </ChartBox>
@@ -619,7 +619,7 @@ function CltVisualiser() {
               <XAxis dataKey="index" />
               <YAxis />
               <Tooltip />
-              <Line dataKey="avg" stroke="#7f312f" dot={false} />
+              <Line dataKey="avg" stroke="#b95f68" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </ChartBox>
@@ -657,9 +657,9 @@ function EstimatorVisualiser() {
             <XAxis dataKey="n" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="unbiased" stroke="#1f5a4a" dot={false} />
-            <Line dataKey="biasedConsistent" stroke="#a47c39" dot={false} />
-            <Line dataKey="inconsistent" stroke="#7f312f" dot={false} />
+            <Line dataKey="unbiased" stroke="#16816c" dot={false} />
+            <Line dataKey="biasedConsistent" stroke="#d89b38" dot={false} />
+            <Line dataKey="inconsistent" stroke="#b95f68" dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -691,8 +691,8 @@ function LikelihoodVisualiser() {
             <XAxis dataKey="theta" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="logLikelihood" stroke="#1f5a4a" dot={false} />
-            <ReferenceLine x={mle} stroke="#7f312f" />
+            <Line dataKey="logLikelihood" stroke="#16816c" dot={false} />
+            <ReferenceLine x={mle} stroke="#b95f68" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -724,9 +724,9 @@ function ConfidenceIntervalVisualiser() {
             <XAxis dataKey="i" />
             <YAxis domain={[-1.2, 1.2]} />
             <Tooltip />
-            <ReferenceLine y={0} stroke="#25221d" />
+            <ReferenceLine y={0} stroke="#222538" />
             <Scatter data={intervals.flatMap((d) => [{ i: d.i, y: d.lower, covers: d.covers }, { i: d.i, y: d.upper, covers: d.covers }])}>
-              {intervals.flatMap((d) => [d, d]).map((d, index) => <Cell key={index} fill={d.covers ? "#1f5a4a" : "#7f312f"} />)}
+              {intervals.flatMap((d) => [d, d]).map((d, index) => <Cell key={index} fill={d.covers ? "#16816c" : "#b95f68"} />)}
             </Scatter>
           </ScatterChart>
         </ResponsiveContainer>
@@ -753,10 +753,10 @@ function HypothesisVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Area dataKey="rejection" fill="#7f312f" stroke="#7f312f" />
-            <Line dataKey="density" stroke="#1f5a4a" dot={false} />
-            <ReferenceLine x={critical} stroke="#25221d" label="critical" />
-            <ReferenceLine x={z} stroke="#a47c39" label="observed" />
+            <Area dataKey="rejection" fill="#b95f68" stroke="#b95f68" />
+            <Line dataKey="density" stroke="#16816c" dot={false} />
+            <ReferenceLine x={critical} stroke="#222538" label="critical" />
+            <ReferenceLine x={z} stroke="#d89b38" label="observed" />
           </AreaChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -786,8 +786,8 @@ function PowerVisualiser() {
             <XAxis dataKey="mu" />
             <YAxis domain={[0, 1]} />
             <Tooltip />
-            <Line dataKey="power" stroke="#7f312f" dot={false} />
-            <ReferenceLine x={10} stroke="#25221d" />
+            <Line dataKey="power" stroke="#b95f68" dot={false} />
+            <ReferenceLine x={10} stroke="#222538" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>
@@ -817,9 +817,9 @@ function DeltaVisualiser() {
             <XAxis dataKey="x" />
             <YAxis />
             <Tooltip />
-            <Line dataKey="gx" stroke="#1f5a4a" dot={false} />
-            <Line dataKey="tangent" stroke="#7f312f" dot={false} />
-            <ReferenceLine x={mu} stroke="#25221d" />
+            <Line dataKey="gx" stroke="#16816c" dot={false} />
+            <Line dataKey="tangent" stroke="#b95f68" dot={false} />
+            <ReferenceLine x={mu} stroke="#222538" />
           </LineChart>
         </ResponsiveContainer>
       </ChartBox>

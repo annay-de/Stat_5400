@@ -14,7 +14,7 @@ export function PageHeader({
           {eyebrow}
         </div>
       ) : null}
-      <h1 className="font-serif text-3xl font-semibold leading-[1.08] text-ink md:text-4xl xl:text-5xl">{title}</h1>
+      <h1 className="font-sans text-3xl font-semibold leading-[1.08] text-ink md:text-4xl xl:text-5xl">{title}</h1>
       {description ? <p className="mt-3 max-w-3xl text-[15px] leading-7 text-graphite">{description}</p> : null}
     </section>
   );

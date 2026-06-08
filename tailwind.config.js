@@ -4,23 +4,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: "#f8f5ee",
-        surface: "#fffdfa",
-        mist: "#eee8dc",
-        ink: "#24221e",
-        graphite: "#555047",
-        brass: "#9c7a43",
-        forest: "#245647",
-        oxblood: "#783331",
-        slateblue: "#586575"
+        paper: "#f7f2e8",
+        surface: "#fffaf1",
+        mist: "#e9dfce",
+        ink: "#222538",
+        graphite: "#5d6270",
+        brass: "#b9842f",
+        forest: "#1c735f",
+        oxblood: "#a6424d",
+        slateblue: "#536f9f",
+        ocean: "#256f8f",
+        teal: "#16816c",
+        honey: "#d89b38",
+        blush: "#b95f68",
+        sage: "#dce9df",
+        lavender: "#e4e1f4"
       },
       fontFamily: {
-        sans: ["Aptos", "Inter", "ui-sans-serif", "system-ui", "Segoe UI", "Arial", "sans-serif"],
-        serif: ["Charter", "Georgia", "Cambria", "Times New Roman", "serif"]
+        sans: ["Montserrat", "ui-sans-serif", "system-ui", "Segoe UI", "Arial", "sans-serif"],
+        serif: ["Montserrat", "ui-sans-serif", "system-ui", "Segoe UI", "Arial", "sans-serif"]
       },
       boxShadow: {
-        paper: "0 18px 45px rgba(56, 51, 43, 0.08)",
-        soft: "0 8px 22px rgba(56, 51, 43, 0.06)"
+        paper: "0 20px 55px rgba(34, 37, 56, 0.10)",
+        soft: "0 10px 26px rgba(34, 37, 56, 0.08)",
+        colour: "0 18px 42px rgba(37, 111, 143, 0.16)"
+      },
+      backgroundImage: {
+        "accent-hero": "linear-gradient(135deg, #24345f 0%, #16816c 52%, #d89b38 100%)",
+        "glass-panel": "linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 250, 241, 0.72) 48%, rgba(232, 247, 243, 0.76) 100%)",
+        "quiet-band": "linear-gradient(135deg, rgba(37, 111, 143, 0.10), rgba(216, 155, 56, 0.08) 55%, rgba(185, 95, 104, 0.09))"
       }
     }
   },

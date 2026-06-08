@@ -38,7 +38,7 @@ export function ProblemBankPage() {
       <PageHeader eyebrow="Problem bank" title="Problems with solved methods" description="Search by source, topic, difficulty, exam relevance and archetype. Solved status is stored locally in your browser." />
       <div className="paper-card mb-5 rounded p-4">
         <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
-          <input className="rounded border border-ink/15 bg-white/80 px-3 py-2 text-sm" placeholder="Search problems" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input className="soft-input rounded px-3 py-2 text-sm" placeholder="Search problems" value={query} onChange={(event) => setQuery(event.target.value)} />
           <Select value={topic} onChange={setTopic} options={["all", ...topicTags]} label="Topic" />
           <Select value={source} onChange={setSource} options={["all", ...sourceNames]} label="Source" />
           <Select value={difficulty} onChange={setDifficulty} options={["all", "Core", "Medium", "Hard", "Exam"]} label="Difficulty" />
@@ -52,7 +52,7 @@ export function ProblemBankPage() {
           <div key={problem.id} className="relative">
             <ProblemCard problem={problem} />
             <button
-              className={`focus-ring absolute bottom-3 right-3 rounded px-2 py-1 text-xs ${solved[problem.id] ? "bg-forest text-white" : "bg-white text-graphite border border-ink/10"}`}
+              className={`focus-ring absolute bottom-3 right-3 rounded px-2 py-1 text-xs ${solved[problem.id] ? "bg-accent-hero text-white shadow-soft" : "border border-ocean/15 bg-white/80 text-graphite"}`}
               onClick={() => toggleSolved(problem.id)}
             >
               {solved[problem.id] ? "Solved" : "Mark solved"}
@@ -68,7 +68,7 @@ function Select({ value, onChange, options, label }: { value: string; onChange: 
   return (
     <label className="text-xs uppercase tracking-[0.14em] text-brass">
       {label}
-      <select className="mt-1 w-full rounded border border-ink/15 bg-white/80 px-3 py-2 text-sm normal-case tracking-normal text-ink" value={value} onChange={(event) => onChange(event.target.value)}>
+      <select className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={value} onChange={(event) => onChange(event.target.value)}>
         {options.map((option) => <option key={option} value={option}>{option === "all" ? `All ${label.toLowerCase()}` : option}</option>)}
       </select>
     </label>

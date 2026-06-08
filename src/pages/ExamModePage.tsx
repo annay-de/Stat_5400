@@ -82,7 +82,7 @@ export function ExamModePage() {
           <div className="rounded border border-ink/10 bg-white/70 px-3 py-2 text-sm">
             Time: <strong className={seconds < 300 ? "text-oxblood" : "text-ink"}>{formatTime(seconds)}</strong>
           </div>
-          <button className="focus-ring rounded bg-ink px-4 py-2 text-sm text-paper" onClick={() => setStarted((value) => !value)}>
+          <button className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-colour" onClick={() => setStarted((value) => !value)}>
             {started ? "Pause timer" : "Start timer"}
           </button>
         </div>
@@ -92,12 +92,12 @@ export function ExamModePage() {
         <section className="space-y-5">
           <article className="paper-card rounded p-5">
             <div className="text-xs uppercase tracking-[0.16em] text-brass">Question {current + 1} of {questions.length} · {question.source}</div>
-            <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">{question.title}</h2>
+            <h2 className="mt-2 font-sans text-3xl font-semibold text-ink">{question.title}</h2>
             <p className="mt-4 leading-7 text-graphite">{question.statement}</p>
           </article>
 
           <article className="paper-card rounded p-5">
-            <h2 className="font-serif text-2xl font-semibold text-ink">Step-by-step hints</h2>
+            <h2 className="font-sans text-2xl font-semibold text-ink">Step-by-step hints</h2>
             <div className="mt-4 space-y-3">
               {question.solution.slice(0, revealedHints).map((step, index) => (
                 <div key={step} className="rounded border border-ink/10 bg-white/70 p-3 text-sm leading-6 text-graphite">
@@ -114,34 +114,34 @@ export function ExamModePage() {
 
           {showSolution ? (
             <article className="paper-card rounded p-5">
-              <h2 className="font-serif text-2xl font-semibold text-ink">Full solution</h2>
+              <h2 className="font-sans text-2xl font-semibold text-ink">Full solution</h2>
               <div className="mt-4"><SolutionSteps steps={question.solution} /></div>
               <div className="mt-5 rounded border border-forest/20 bg-forest/5 p-4 text-sm leading-6 text-graphite">
                 Final answer: <strong className="text-ink">{question.finalAnswer}</strong>
               </div>
             </article>
           ) : (
-            <button className="focus-ring rounded bg-oxblood px-4 py-2 text-sm text-white" onClick={() => setShowSolution(true)}>Reveal final solution</button>
+            <button className="focus-ring rounded bg-blush px-4 py-2 text-sm text-white shadow-soft" onClick={() => setShowSolution(true)}>Reveal final solution</button>
           )}
         </section>
 
         <aside className="space-y-4">
           <div className="paper-card rounded p-5">
-            <h2 className="font-serif text-xl font-semibold text-ink">Method score</h2>
+            <h2 className="font-sans text-xl font-semibold text-ink">Method score</h2>
             <p className="mt-2 text-sm leading-6 text-graphite">0: no method, 1: correct archetype, 2: formula, 3: intermediate steps, 4: complete exam answer.</p>
             <div className="mt-3 grid grid-cols-5 gap-2">
               {[0, 1, 2, 3, 4].map((score) => (
-                <button key={score} className={`focus-ring rounded border px-2 py-2 ${scores[question.id] === score ? "border-forest bg-forest text-white" : "border-ink/10 bg-white"}`} onClick={() => setScores((old) => ({ ...old, [question.id]: score }))}>
+                <button key={score} className={`focus-ring rounded border px-2 py-2 ${scores[question.id] === score ? "border-teal bg-teal text-white shadow-soft" : "border-ocean/15 bg-white/80"}`} onClick={() => setScores((old) => ({ ...old, [question.id]: score }))}>
                   {score}
                 </button>
               ))}
             </div>
           </div>
           <div className="paper-card rounded p-5">
-            <h2 className="font-serif text-xl font-semibold text-ink">Mistake log</h2>
+            <h2 className="font-sans text-xl font-semibold text-ink">Mistake log</h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {["wrong distribution", "wrong limits", "critical value", "algebra", "conclusion", "time"].map((mistake) => (
-                <button key={mistake} className={`focus-ring rounded px-2 py-1 text-xs ${mistakes.includes(mistake) ? "bg-oxblood text-white" : "border border-ink/10 bg-white"}`} onClick={() => setMistakes((old) => old.includes(mistake) ? old.filter((item) => item !== mistake) : [...old, mistake])}>
+                <button key={mistake} className={`focus-ring rounded px-2 py-1 text-xs ${mistakes.includes(mistake) ? "bg-blush text-white shadow-soft" : "border border-ocean/15 bg-white/80"}`} onClick={() => setMistakes((old) => old.includes(mistake) ? old.filter((item) => item !== mistake) : [...old, mistake])}>
                   {mistake}
                 </button>
               ))}
@@ -153,7 +153,7 @@ export function ExamModePage() {
           </div>
           <div className="flex gap-2">
             <button disabled={current === 0} className="focus-ring flex-1 rounded border border-ink/15 bg-white px-3 py-2 text-sm disabled:opacity-40" onClick={() => move(-1)}>Previous</button>
-            <button disabled={current === questions.length - 1} className="focus-ring flex-1 rounded bg-ink px-3 py-2 text-sm text-paper disabled:opacity-40" onClick={() => move(1)}>Next</button>
+            <button disabled={current === questions.length - 1} className="focus-ring flex-1 rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-colour disabled:opacity-40" onClick={() => move(1)}>Next</button>
           </div>
         </aside>
       </div>

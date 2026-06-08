@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import { PageHeader } from "../components/PageHeader";
 import { courseModules } from "../data/courseTopics";
 
+const moduleTones = [
+  "border-ocean/20 bg-ocean/10 text-ocean",
+  "border-teal/20 bg-teal/10 text-forest",
+  "border-honey/25 bg-honey/10 text-brass",
+  "border-blush/20 bg-blush/10 text-oxblood",
+  "border-slateblue/20 bg-lavender text-slateblue",
+  "border-forest/20 bg-sage text-forest",
+];
+
 export function ModulesPage() {
   return (
     <div>
@@ -12,17 +21,17 @@ export function ModulesPage() {
       />
       <div className="grid gap-4 md:grid-cols-2">
         {courseModules.map((module, index) => (
-          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring rounded p-5 transition hover:-translate-y-0.5 hover:border-forest/50">
+          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/40 hover:shadow-colour">
             <div className="flex items-start gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-ink/15 bg-white/80 font-serif text-lg font-semibold">
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded border font-sans text-lg font-semibold ${moduleTones[index % moduleTones.length]}`}>
                 {index + 1}
               </span>
               <div>
-                <h2 className="font-serif text-2xl font-semibold text-ink">{module.title}</h2>
+                <h2 className="font-sans text-2xl font-semibold text-ink">{module.title}</h2>
                 <p className="mt-2 text-sm leading-6 text-graphite">{module.question}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {module.relatedProblems.map((id) => (
-                    <span key={id} className="rounded bg-forest/10 px-2 py-1 text-xs text-forest">{id}</span>
+                    <span key={id} className="rounded bg-teal/10 px-2 py-1 text-xs text-forest">{id}</span>
                   ))}
                 </div>
               </div>

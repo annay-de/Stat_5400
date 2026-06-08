@@ -47,13 +47,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[270px_minmax(0,1fr)]">
-      <aside className="sticky top-0 hidden h-screen border-r border-ink/10 bg-surface/92 px-4 py-5 shadow-soft backdrop-blur lg:block">
+      <aside className="sticky top-0 hidden h-screen border-r border-white/70 bg-surface/80 px-4 py-5 shadow-soft backdrop-blur-xl lg:block">
         <NavLink to="/" className="focus-ring flex items-center gap-3 rounded px-2 py-2">
-          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-ink/10 bg-ink text-paper">
+          <div className="flex h-11 w-11 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-colour">
             <Sigma size={22} />
           </div>
           <div>
-            <div className="font-serif text-xl font-semibold leading-tight">Stats Lab</div>
+            <div className="font-sans text-xl font-semibold leading-tight">Stats Lab</div>
             <div className="text-[11px] uppercase tracking-[0.2em] text-graphite">Mastery cockpit</div>
           </div>
         </NavLink>
@@ -73,26 +73,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
           ))}
         </div>
 
-        <div className="absolute bottom-5 left-4 right-4 rounded-md border border-forest/15 bg-forest/5 p-3 text-xs leading-5 text-graphite">
+        <div className="absolute bottom-5 left-4 right-4 rounded-md border border-teal/20 bg-quiet-band p-3 text-xs leading-5 text-graphite shadow-soft">
           <div className="font-semibold text-forest">One-week path</div>
           Start with the dashboard, then move from modules to problem bank to exam mode.
         </div>
       </aside>
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur lg:hidden">
+        <header className="sticky top-0 z-40 border-b border-white/70 bg-surface/90 backdrop-blur-xl lg:hidden">
           <div className="flex items-center justify-between gap-4 px-4 py-3">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-ink/15 bg-ink text-paper">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-white/30 bg-accent-hero text-white shadow-colour">
               <Sigma size={22} />
             </div>
             <div>
-              <div className="font-serif text-lg font-semibold leading-tight">Stats Lab</div>
+              <div className="font-sans text-lg font-semibold leading-tight">Stats Lab</div>
               <div className="text-xs uppercase tracking-[0.18em] text-graphite">Statistics Mastery</div>
             </div>
           </NavLink>
         </div>
-          <nav className="flex gap-1 overflow-x-auto border-t border-ink/10 px-3 py-2">
+          <nav className="flex gap-1 overflow-x-auto border-t border-white/70 px-3 py-2">
           {mobileNavItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -101,7 +101,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 to={item.to}
                 className={({ isActive }) =>
                   `focus-ring flex shrink-0 items-center gap-2 rounded px-3 py-2 text-sm ${
-                    isActive ? "bg-ink text-paper" : "bg-white/60 text-graphite"
+                    isActive ? "bg-accent-hero text-white shadow-colour" : "bg-white/70 text-graphite hover:bg-white"
                   }`
                 }
               >
@@ -134,8 +134,8 @@ function DesktopNavItem({
       to={item.to}
       className={`focus-ring flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition ${
         active
-          ? "bg-ink text-paper shadow-soft"
-          : "text-graphite hover:bg-mist/70 hover:text-ink"
+          ? "bg-accent-hero text-white shadow-colour"
+          : "text-graphite hover:bg-ocean/10 hover:text-ink"
       }`}
     >
       <Icon size={17} />

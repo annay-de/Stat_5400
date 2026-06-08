@@ -85,11 +85,11 @@ export function SolverPage() {
           <div className="paper-card rounded p-4">
             <label className="text-xs uppercase tracking-[0.14em] text-brass">
               Paste question wording
-              <textarea className="mt-2 h-32 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
+              <textarea className="soft-input mt-2 h-32 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={question} onChange={(event) => setQuestion(event.target.value)} />
             </label>
-            <button className="focus-ring mt-3 w-full rounded bg-forest px-3 py-2 text-sm text-white" onClick={suggest}>Suggest archetype</button>
+            <button className="focus-ring mt-3 w-full rounded bg-accent-hero px-3 py-2 text-sm text-white shadow-colour" onClick={suggest}>Suggest archetype</button>
             {suggested ? (
-              <button className="focus-ring mt-3 w-full rounded border border-forest/30 bg-forest/5 px-3 py-2 text-left text-sm text-forest" onClick={() => selectKind(suggested)}>
+              <button className="focus-ring mt-3 w-full rounded border border-teal/25 bg-teal/10 px-3 py-2 text-left text-sm text-forest" onClick={() => selectKind(suggested)}>
                 Suggested: {solverLabels[suggested]}
               </button>
             ) : null}
@@ -97,7 +97,7 @@ export function SolverPage() {
           <div className="paper-card rounded p-4">
             <label className="text-xs uppercase tracking-[0.14em] text-brass">
               Guided calculator
-              <select className="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
+              <select className="soft-input mt-2 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={kind} onChange={(event) => selectKind(event.target.value as SolverKind)}>
                 {(Object.keys(solverLabels) as SolverKind[]).map((item) => <option key={item} value={item}>{solverLabels[item]}</option>)}
               </select>
             </label>
@@ -106,13 +106,13 @@ export function SolverPage() {
                 <label key={field} className="block text-xs uppercase tracking-[0.12em] text-brass">
                   {fieldLabels[field] ?? field}
                   {field === "tail" ? (
-                    <select className="mt-1 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
+                    <select className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={String(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: event.target.value }))}>
                       <option value="greater">greater than</option>
                       <option value="less">less than</option>
                       <option value="two-sided">two-sided</option>
                     </select>
                   ) : (
-                    <input type="number" step="any" className="mt-1 w-full rounded border border-ink/15 bg-white px-3 py-2 text-sm normal-case tracking-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
+                    <input type="number" step="any" className="soft-input mt-1 w-full rounded px-3 py-2 text-sm normal-case tracking-normal text-ink" value={Number(value)} onChange={(event) => setValues((old) => ({ ...old, [field]: Number(event.target.value) }))} />
                   )}
                 </label>
               ))}
@@ -121,11 +121,11 @@ export function SolverPage() {
         </aside>
         <section className="paper-card rounded p-5">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">Generated answer format</div>
-          <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">{solverLabels[kind]}</h2>
+          <h2 className="mt-2 font-sans text-3xl font-semibold text-ink">{solverLabels[kind]}</h2>
           <div className="mt-5">
             <SolutionSteps steps={steps} />
           </div>
-          <div className="mt-6 rounded border border-brass/30 bg-brass/5 p-4 text-sm leading-6 text-graphite">
+          <div className="mt-6 rounded border border-honey/30 bg-honey/10 p-4 text-sm leading-6 text-graphite">
             In an exam, define variables and state assumptions before substituting. For tests, include H0, HA, statistic, null distribution, alpha, rejection rule, computed value and conclusion.
           </div>
         </section>

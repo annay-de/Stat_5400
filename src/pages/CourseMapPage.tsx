@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import { PageHeader } from "../components/PageHeader";
 import { courseModules, moduleDependencies } from "../data/courseTopics";
 
+const mapTones = [
+  "border-ocean/20 bg-ocean/10 text-ocean",
+  "border-teal/20 bg-teal/10 text-forest",
+  "border-honey/25 bg-honey/10 text-brass",
+  "border-blush/20 bg-blush/10 text-oxblood",
+  "border-slateblue/20 bg-lavender text-slateblue",
+  "border-forest/20 bg-sage text-forest",
+];
+
 export function CourseMapPage() {
   return (
     <div>
@@ -20,13 +29,13 @@ export function CourseMapPage() {
               <div key={node} className="flex items-center gap-3">
                 <Link
                   to={`/modules/${target.id}`}
-                  className="focus-ring flex h-32 w-36 flex-col items-center justify-center rounded border border-ink/15 bg-white/75 px-3 text-center transition hover:border-forest/50 hover:bg-forest/5"
+                  className={`focus-ring flex h-32 w-36 flex-col items-center justify-center rounded border px-3 text-center transition hover:-translate-y-0.5 hover:bg-white/80 hover:shadow-soft ${mapTones[index % mapTones.length]}`}
                 >
-                  <span className="font-serif text-base font-semibold text-ink">{node}</span>
+                  <span className="font-sans text-base font-semibold">{node}</span>
                   <span className="mt-2 text-xs leading-5 text-graphite">Open module</span>
                 </Link>
                 {index < moduleDependencies.length - 1 ? (
-                  <div className="h-px w-8 bg-ink/25 after:ml-7 after:block after:h-2 after:w-2 after:-translate-y-[3.5px] after:rotate-45 after:border-r after:border-t after:border-ink/35" />
+                  <div className="h-px w-8 bg-ocean/25 after:ml-7 after:block after:h-2 after:w-2 after:-translate-y-[3.5px] after:rotate-45 after:border-r after:border-t after:border-ocean/35" />
                 ) : null}
               </div>
             );
@@ -34,11 +43,14 @@ export function CourseMapPage() {
         </div>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {courseModules.map((module) => (
-          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring rounded p-5 transition hover:border-forest/50">
+        {courseModules.map((module, index) => (
+          <Link key={module.id} to={`/modules/${module.id}`} className="paper-card focus-ring accent-strip rounded p-5 transition hover:-translate-y-0.5 hover:border-ocean/40 hover:shadow-colour">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brass">{module.shortTitle}</div>
-            <h2 className="mt-2 font-serif text-2xl font-semibold text-ink">{module.title}</h2>
+            <h2 className="mt-2 font-sans text-2xl font-semibold text-ink">{module.title}</h2>
             <p className="mt-3 text-sm leading-6 text-graphite">{module.question}</p>
+            <div className={`mt-4 inline-flex rounded border px-2 py-1 text-xs ${mapTones[index % mapTones.length]}`}>
+              Open learning route
+            </div>
           </Link>
         ))}
       </div>

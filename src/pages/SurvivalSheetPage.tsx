@@ -57,7 +57,7 @@ export function SurvivalSheetPage() {
       <div className="grid gap-4 md:grid-cols-2">
         {decisions.map((section) => (
           <article key={section.title} className="paper-card rounded p-5">
-            <h2 className="font-serif text-2xl font-semibold text-ink">{section.title}</h2>
+            <h2 className="font-sans text-2xl font-semibold text-ink">{section.title}</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-graphite">
               {section.lines.map((line) => <li key={line}>{line}</li>)}
             </ul>
@@ -65,12 +65,12 @@ export function SurvivalSheetPage() {
         ))}
       </div>
       <section className="paper-card mt-5 rounded p-5">
-        <h2 className="font-serif text-3xl font-semibold text-ink">Last 12 Hours Before Exam</h2>
+        <h2 className="font-sans text-3xl font-semibold text-ink">Last 12 Hours Before Exam</h2>
         <ol className="mt-4 grid list-decimal gap-3 pl-5 text-sm leading-6 text-graphite md:grid-cols-2">
           {lastTwelve.map((item) => <li key={item}>{item}</li>)}
         </ol>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link to="/exam-mode" className="focus-ring rounded bg-ink px-4 py-2 text-sm text-paper">Run a mock final</Link>
+          <Link to="/exam-mode" className="focus-ring rounded bg-accent-hero px-4 py-2 text-sm text-white shadow-colour">Run a mock final</Link>
           <Link to="/problem-bank" className="focus-ring rounded border border-ink/15 bg-white/70 px-4 py-2 text-sm text-ink">Redo problem bank</Link>
         </div>
       </section>

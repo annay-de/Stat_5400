@@ -29,7 +29,7 @@ export function ModuleDetailPage() {
         <div className="space-y-5">
           {sectionLabels.map((label) => (
             <section key={label} className="paper-card rounded p-5">
-              <h2 className="font-serif text-2xl font-semibold text-ink">{label}</h2>
+              <h2 className="font-sans text-2xl font-semibold text-ink">{label}</h2>
               {label === sectionLabels[0] ? <p className="mt-3 leading-7 text-graphite">{module.question}</p> : null}
               {label === sectionLabels[1] ? <p className="mt-3 leading-7 text-graphite">{module.visualIntuition}</p> : null}
               {label === sectionLabels[2] ? <p className="mt-3 leading-7 text-graphite">{module.formalDefinition}</p> : null}
@@ -49,7 +49,7 @@ export function ModuleDetailPage() {
         </div>
         <aside className="space-y-4">
           <div className="paper-card rounded p-5">
-            <h2 className="font-serif text-xl font-semibold text-ink">Worked examples</h2>
+            <h2 className="font-sans text-xl font-semibold text-ink">Worked examples</h2>
             <div className="mt-4 space-y-3">
               {related.map((problem) => (
                 <Link key={problem.id} to={`/problem/${problem.id}`} className="block rounded border border-ink/10 bg-white/70 p-3 text-sm hover:border-forest/40">
